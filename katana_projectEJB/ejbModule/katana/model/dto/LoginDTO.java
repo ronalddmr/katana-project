@@ -16,7 +16,7 @@ import katana.model.manager.ManagerUsuario;
  */
 public class LoginDTO {
 	private String usuario;
-	private String codigoUsuario;
+	private int codigoUsuario;
 	private String tipoUsuario;
 	private String rutaAcceso;
 	private String apellido;
@@ -47,10 +47,10 @@ public class LoginDTO {
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
-	public String getCodigoUsuario() {
+	public int getCodigoUsuario() {
 		return codigoUsuario;
 	}
-	public void setCodigoUsuario(String codigoUsuario) {
+	public void setCodigoUsuario(int codigoUsuario) {
 		this.codigoUsuario = codigoUsuario;
 	}
 	public String getTipoUsuario() {

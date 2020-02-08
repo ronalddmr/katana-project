@@ -19,5 +19,6 @@
 		<class>katana.model.entities.UsuRol</class>
 		<class>katana.model.entities.UsuUsuario</class>
 		<class>katana.model.entities.UsuUsuarioRol</class>
+		<class>katana.model.entities.Bitacora</class>
 	</persistence-unit>
 </persistence>

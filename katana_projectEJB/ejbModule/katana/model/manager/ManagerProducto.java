@@ -1,15 +1,19 @@
 package katana.model.manager;
 
 import java.math.BigDecimal;
+import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import katana.model.entities.Bitacora;
 import katana.model.entities.ProColor;
 import katana.model.entities.ProProducto;
 import katana.model.entities.ProTalla;
@@ -24,6 +28,10 @@ import katana.model.entities.ProTipoProducto;
 public class ManagerProducto {
 	@PersistenceContext
 	private EntityManager em;
+	@EJB
+	private ManagerDAO managerDAO;
+	@EJB
+	private ManagerSeguridad managerSeguridad;
 
 
     /**
@@ -42,6 +50,29 @@ public class ManagerProducto {
     public ProProducto findProductoById(int id) {
     	return em.find(ProProducto.class, id);
     }
+    
+	public void crearEventoPro(int codigoUsuario,Class clase,String metodo,String descripcion) throws Exception{
+		Bitacora evento=new Bitacora();
+		//cambio para probar git
+		
+		//Obtener la DIreccion IP
+	       InetAddress direccion = InetAddress.getLocalHost();
+           String IP_local = direccion.getHostAddress();//ip como String
+		
+		//if(codigoUsuario==null )
+			//throw new Exception("Error auditoria: debe indicar el codigo del usuario.");
+		if(metodo==null||metodo.length()==0)
+			throw new Exception("Error auditoria: debe indicar el metodo que genera el evento.");
+		System.out.print(codigoUsuario);
+		evento.setCodigoUsuario(codigoUsuario);
+		evento.setMetodo(clase.getSimpleName()+"/"+metodo);
+		evento.setDescripcion(descripcion);
+		evento.setFechaEvento(new Date());
+		evento.setDireccionIp(IP_local);
+		// se puede consultar desde JSF como extraer la ip desde donde accede el cliente
+		// que se conecta
+		managerDAO.insertar(evento);
+	}
     
     public void insertarProducto(ProProducto producto) throws Exception {
         ProProducto p=new ProProducto();

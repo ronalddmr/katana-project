@@ -7,6 +7,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import katana.model.dto.LoginDTO;
+import katana.model.manager.ManagerAuditoria;
 /*import katana.model.manager.ManagerAuditoria;*/
 //FALTA DE IMPLEMENTAR ESTO EN EL DIAGRAMA DE LA BASE DE DATOS PORQUE EN EL MANAGER DE AUDITORIA HACE FALTA LAS ENTITIES 
 //QUE CORRESPONEN A LA AUDITORIA
@@ -27,9 +28,9 @@ public class BeanLogin implements Serializable {
 	private boolean acceso;
 	@EJB
 	private ManagerSeguridad managerSeguridad;
-	/*
-	 * @EJB private ManagerAuditoria managerAuditoria;
-	 */
+	@EJB
+	private ManagerAuditoria managerAuditoria;
+
 	private LoginDTO loginDTO;
 
 	@PostConstruct
@@ -48,6 +49,8 @@ public class BeanLogin implements Serializable {
 			//verificamos el acceso del usuario:
 			tipoUsuario=loginDTO.getTipoUsuario();
 			//redireccion dependiendo del tipo de usuario:
+			managerAuditoria.crearEvento(loginDTO.getCodigoUsuario(),this.getClass(), "Acceder Sistema", "Acceso a login");
+
 			/*
 			 * managerAuditoria.crearEvento(codigoUsuario, this.getClass(),
 			 * "accederSistema", "Acceso a login");
@@ -67,10 +70,8 @@ public class BeanLogin implements Serializable {
 	public String salirSistema(){
 		System.out.println("salirSistema");
 		try {
-			/*
-			 * managerAuditoria.crearEvento(loginDTO.getCodigoUsuario(), this.getClass(),
-			 * "salisSistema", "Cerrar sesion");
-			 */
+			managerAuditoria.crearEvento(loginDTO.getCodigoUsuario(),this.getClass(), "Salir Sistema", "Cerrar Sesion");
+			 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

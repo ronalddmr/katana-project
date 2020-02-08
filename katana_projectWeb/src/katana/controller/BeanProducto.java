@@ -5,10 +5,12 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import katana.controller.JSFUtil;
+import katana.model.dto.LoginDTO;
 import katana.model.entities.ProColor;
 import katana.model.entities.ProProducto;
 import katana.model.entities.ProTalla;
 import katana.model.entities.ProTipoProducto;
+import katana.model.manager.ManagerAuditoria;
 import katana.model.manager.ManagerProducto;
 
 import java.io.Serializable;
@@ -28,6 +30,9 @@ public class BeanProducto implements Serializable{
 	private List<ProProducto> listaProducto;
 	private ProProducto producto;
 	private ProProducto productoSeleccionado;
+	@EJB
+	private ManagerAuditoria managerAuditoria;
+	private LoginDTO loginDTO;
 	@PostConstruct
 	public void inicializar() 
 	{
@@ -41,10 +46,11 @@ public class BeanProducto implements Serializable{
 	/*BEAN PARA pro_producto*/
 	public void actionListenerInsertarProducto() {
 		try {
-			
+			managerProducto.crearEventoPro(loginDTO.getCodigoUsuario(),this.getClass(), "Acceso Productos", "Insercion de Producto");
 			managerProducto.insertarProducto(producto);
 			listaProducto=managerProducto.findAllProducto();
 			producto=new ProProducto();
+
 			JSFUtil.crearMensajeInfo("Se ha insertado el Producto");
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
@@ -58,6 +64,7 @@ public class BeanProducto implements Serializable{
 	
 	public void actionListenerActualizarProducto() {
 		try {
+			managerProducto.crearEventoPro(loginDTO.getCodigoUsuario(),this.getClass(), "Acceso Productos", "Insercion de Producto");
 			managerProducto.actualizarProducto(productoSeleccionado);
 			listaProducto=managerProducto.findAllProducto();
 			JSFUtil.crearMensajeInfo("Datos actualizados");
@@ -68,9 +75,15 @@ public class BeanProducto implements Serializable{
 		}
 	}
 	public void actionListenerEliminarProducto(int id) {
-		managerProducto.eliminarProducto(id);
-		listaProducto=managerProducto.findAllProducto();
-		JSFUtil.crearMensajeInfo("Producto eliminado");
+		try {
+			managerProducto.crearEventoPro(loginDTO.getCodigoUsuario(),this.getClass(), "Acceso Productos", "Insercion de Producto");
+			managerProducto.eliminarProducto(id);
+			listaProducto=managerProducto.findAllProducto();
+			JSFUtil.crearMensajeInfo("Producto eliminado");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 	
 	/*BEAN PARA pro_tipo_producto*/
@@ -155,6 +168,14 @@ public class BeanProducto implements Serializable{
 
 	public void setProductoSeleccionado(ProProducto productoSeleccionado) {
 		this.productoSeleccionado = productoSeleccionado;
+	}
+
+	public LoginDTO getLoginDTO() {
+		return loginDTO;
+	}
+
+	public void setLoginDTO(LoginDTO loginDTO) {
+		this.loginDTO = loginDTO;
 	}
 	
 	

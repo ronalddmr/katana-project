@@ -60,7 +60,7 @@ public class ManagerSeguridad {
 		loginDTO.setCorreo(usuario.getCorreo());
 		loginDTO.setImagen(usuario.getImagenPerfil());
 		loginDTO.setPassword(usuario.getPassword());
-		
+		loginDTO.setCodigoUsuario(usuario.getIdUsuario());
 		loginDTO.setPedidos(usuario.getPedPedidos());
 		loginDTO.setProductos(usuario.getProProductos());
 
