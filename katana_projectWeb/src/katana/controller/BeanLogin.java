@@ -132,6 +132,14 @@ public class BeanLogin implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	public LoginDTO getLoginDTO() {
+		return loginDTO;
+	}
+	public void setLoginDTO(LoginDTO loginDTO) {
+		this.loginDTO = loginDTO;
+	}
+	
+	
 	
 	
 	

@@ -173,7 +173,7 @@
 					<nav class="menu">
 					<ul class="main_menu">
 					
-						<li><a><h:outputText value="#{beanLogin.nombre}" /></a>
+						<li><a><h:outputText value="#{beanLogin.loginDTO.usuario}" /></a>
 							<ul class="sub_menu">
 								<li><a href="#">Perfil</a></li>
 								<li><a href="#">Configuracion</a></li>
@@ -219,10 +219,10 @@
                         <div class="col-md-6">
                             <h6>Nombre</h6>
                             <p>
-                                
+                                <h:outputText value="#{beanLogin.loginDTO.usuario} #{beanLogin.loginDTO.apellido}" />
                             </p>
                             <h6>Correo</h6>
-                            <p></p>
+                            <p><h:outputText value="#{beanLogin.loginDTO.correo}" /></p>
                             
                         </div>
                       
@@ -299,15 +299,15 @@
                 
             </div>
         </div>
-         <div class="col-lg-4 order-lg-1 text-center">
+        <div class="col-lg-4 order-lg-1 text-center">
             <h:graphicImage style="width:150px; heigth:150px"
 									url="#{beanLogin.loginDTO.imagen}" />
-            <h6 class="mt-2">Actualizar imagen</h6>
+									<br/>
             <label class="custom-file">
                 <input type="file" id="file" class="custom-file-input" />
-                <span class="custom-file-control">Subir</span>
+                <span class="custom-file-control">Actualizar imagen</span>
             </label>
-        </div>
+        </div> 
     </div>
 </div>
 
