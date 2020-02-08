@@ -1,0 +1,258 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>Facelet Title</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+	</link>
+	<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+		type="text/css">
+	</link>
+	<link rel="stylesheet" href="../../resource/css/estilosRegistro.css">
+	</link>
+
+	<!-- Theme CSS -->
+	<link href="../../resource/css/freelancer.min.css" rel="stylesheet">
+	</link>
+
+
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../../css/util.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+	<!--===============================================================================================-->
+
+</h:head>
+<h:body>
+
+
+	<!-- Header -->
+	<header class="header1">
+		<!-- Header desktop -->
+		<div class="container-menu-header">
+			<div class="wrap_header">
+				<!-- Logo -->
+				<a href="../../landingPage.xhtml" class="logo"> <img style="width: 200px; height: 600px !important;"
+						src="../../images/katanaimg/katanalogo.png" alt="IMG-LOGO" />
+				</a>
+
+				<!-- Menu -->
+				<div class="wrap_menu">
+					<nav class="menu">
+						<ul class="main_menu">
+							<li><a href="product.html">Chicas</a></li>
+
+							<li class="sale-noti"><a href="product.html">Chicos</a></li>
+
+							<li><a href="cart.html">Unisex</a></li>
+							<li><a href="index.html">Camisetas</a>
+								<ul class="sub_menu">
+									<li><a href="#">Bandas Musicales</a></li>
+									<li><a href="#">Series</a></li>
+									<li><a href="#">Peliculas</a></li>
+									<li><a href="#">Personalizada</a></li>
+								</ul>
+							</li>
+
+							<li><a href="about.html">Quienes somos</a></li>
+
+							<li><a href="contact.html">Contactos</a></li>
+						</ul>
+					</nav>
+				</div>
+
+				<!-- Header Icon -->
+				<div class="header-icons">
+					<a href="#" class="header-wrapicon1 dis-block"> <img src="../images/icons/icon-header-01.png"
+							class="header-icon1" alt="ICON" />
+					</a> <span class="linedivide1"></span>
+
+					<div class="header-wrapicon2">
+						<img src="../../images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown"
+							alt="ICON" /> <span class="header-icons-noti">3</span>
+
+						<!-- Header cart noti -->
+						<div class="header-cart header-dropdown">
+							<ul class="header-cart-wrapitem">
+								<li class="header-cart-item">
+									<div class="header-cart-item-img">
+										<img src="../../images/item-cart-01.jpg" alt="IMG" />
+									</div>
+
+									<div class="header-cart-item-txt">
+										<a href="#" class="header-cart-item-name"> White Shirt With
+											Pleat Detail Back </a> <span class="header-cart-item-info">
+											1 x $19.00 </span>
+									</div>
+								</li>
+
+								<li class="header-cart-item">
+									<div class="header-cart-item-img">
+										<img src="../../images/item-cart-02.jpg" alt="IMG" />
+									</div>
+
+									<div class="header-cart-item-txt">
+										<a href="#" class="header-cart-item-name"> Converse All
+											Star Hi Black Canvas </a> <span class="header-cart-item-info">
+											1 x $39.00 </span>
+									</div>
+								</li>
+
+								<li class="header-cart-item">
+									<div class="header-cart-item-img">
+										<img src="../../images/item-cart-03.jpg" alt="IMG" />
+									</div>
+
+									<div class="header-cart-item-txt">
+										<a href="#" class="header-cart-item-name"> Nixon Porter
+											Leather Watch In Tan </a> <span class="header-cart-item-info">
+											1 x $17.00 </span>
+									</div>
+								</li>
+							</ul>
+
+							<div class="header-cart-total">Total: $75.00</div>
+
+							<div class="header-cart-buttons">
+
+
+								<div class="header-cart-wrapbtn">
+									<!-- Button -->
+									<a href="../carrito.xhtml"
+										class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										Ver carrito </a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!--===============================================================================================-->
+
+
+
+
+
+
+
+	<div style="margin-top: -60px" class="container">
+
+		<br /> <br /> <br /> <br /> <br /> <br /> <br />
+		<h2 style="text-align: center">Personaliza tu camiseta</h2>
+		<!-- multistep form -->
+		<h:form style="margin-top:10px" id="msform">
+
+			<!-- progressbar -->
+			<ul id="progressbar">
+				<li class="active">Color de Camiseta</li>
+				<li>Caracteristicas</li>
+				<li>Sube tu diseno</li>
+				<li>Previsualizacion</li>
+
+			</ul>
+			<!-- fieldsets -->
+			<fieldset>
+				<style type="text/css">
+					.value {
+						font-weight: bold;
+					}
+				</style>
+				<br /> <input type="button" name="next" class="next action-button" value="Siguiente" />
+				<p:dataGrid var="color" value="#{beanColor.listaColor}" columns="3" layout="grid" id="cars">
+
+					<f:facet name="header">
+						Escoge el color de camiseta:
+					</f:facet>
+
+					<p:panel header="#{color.nombre}" style="text-align:center">
+						<h:panelGrid columns="1" style="width:100%">
+							<!-- <p:graphicImage name="demo/images/car/#{car.brand}.gif" /> -->
+							<img style="height: 150px;" src="../../images/item-cart-01.jpg" />
+						</h:panelGrid>
+						<br />
+						<p:selectBooleanCheckbox value="#{beanProducto.producto.proColor.nombre}" />
+					</p:panel>
+
+				</p:dataGrid>
+
+			</fieldset>
+
+
+			<fieldset>
+				<input type="button" name="previous" class="previous action-button" value="Regresar" /> <input
+					type="button" name="next" class="next action-button" value="Siguiente" />
+
+				<h2 class="fs-title">Escoge talla, estilo y cantidad:</h2>
+				<br />
+				<panelGrid columns="1" style="margin-bottom:10px">
+					<p:outputLabel for="@next" value="Talla:   " />
+					<p:selectOneMenu value="#{beanProducto.producto.proTalla}">
+						<f:selectItems value="#{beanTalla.listaTalla}" var="l" itemLabel="#{l.descripcion}"
+							itemValue="#{l.idTalla}" />
+					</p:selectOneMenu> <br />
+					<br />
+
+					<p:outputLabel for="@next" value="Estilo:   " />
+					<p:selectOneMenu value="#{beanProducto.producto.proEstilo}">
+						<f:selectItems value="#{beanEstilo.listaEstilo}" var="l" itemLabel="#{l.nombre}"
+							itemValue="#{l.idEstilo}" />
+					</p:selectOneMenu> <br />
+
+					<h:outputLabel for="@next" value="Cantidad: " />
+					<p:spinner id="minMax" min="0" max="100" />
+				</panelGrid>
+				<br /> <br /> <br /> <br />
+			</fieldset>
+
+
+			<fieldset>
+				<input type="button" name="previous" class="previous action-button" value="Regresar" /> <input
+					type="button" name="next" class="next action-button" value="Siguiente" />
+				<h2 class="fs-title">Sube el logo que quieras para tu camiseta:
+				</h2>
+				<p:fileUpload value="#{beanProducto.producto.proLogo.imagen}" mode="simple" skinSimple="true" />
+				<br />
+			</fieldset>
+
+			<fieldset>
+				<input type="button" name="previous" class="previous action-button" value="Regresar" />
+				<p:commandButton class="action-button" value="Agregar al carrito" action="carrito.xhtml" />
+				<h2 class="fs-title">Vista previa camiseta personalizada:</h2>
+
+				<h:panelGrid columns="1" style="width:100%; position:relative;">
+					<style>
+						.camiseta {
+							position: relative;
+							top: 0;
+							left: 0;
+						}
+
+						.disenio {
+							position: absolute;
+							top: 80px;
+							left: 270px;
+						}
+					</style>
+					<!--  <p:graphicImage name="demo/images/car/#{car.brand}.gif" /> PARA PONER LA CAMISETA QUE ESCOGE-->
+					<img class="camiseta" style="height: 575px; width: 600px"
+						src="../../images/katanaimg/camisetaBlancaEjemplo.jpg" />
+					<img class="disenio" style="height: 200px;" src="../../images/katanaimg/th1975.png" />
+					<h3>Observacion:</h3>
+					<p:inputTextarea rows="6" cols="33" value="#{beanPersonalizar.personalizada.observacion}" />
+				</h:panelGrid>
+
+
+			</fieldset>
+
+		</h:form>
+	</div>
+
+
+	<script src="../../resource/js/registro.js" />
+	</h:body>
+
+</html>

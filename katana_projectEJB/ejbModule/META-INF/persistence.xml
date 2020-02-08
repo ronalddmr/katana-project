@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="katanaDS" transaction-type="JTA">
+		<jta-data-source>java:/katanaDS</jta-data-source>
+		<class>katana.model.entities.AudEmpresa</class>
+		<class>katana.model.entities.PedDetallePedido</class>
+		<class>katana.model.entities.PedDivpolitica</class>
+		<class>katana.model.entities.PedEstado</class>
+		<class>katana.model.entities.PedIva</class>
+		<class>katana.model.entities.PedPedido</class>
+		<class>katana.model.entities.ProCamiseta</class>
+		<class>katana.model.entities.ProCatalogo</class>
+		<class>katana.model.entities.ProColor</class>
+		<class>katana.model.entities.ProEstilo</class>
+		<class>katana.model.entities.ProLogo</class>
+		<class>katana.model.entities.ProProducto</class>
+		<class>katana.model.entities.ProTalla</class>
+		<class>katana.model.entities.ProTipoProducto</class>
+		<class>katana.model.entities.UsuRol</class>
+		<class>katana.model.entities.UsuUsuario</class>
+		<class>katana.model.entities.UsuUsuarioRol</class>
+	</persistence-unit>
+</persistence>

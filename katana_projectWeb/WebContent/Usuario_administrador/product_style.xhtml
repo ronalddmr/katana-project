@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no"></meta>
+		<title>Estilos del Producto</title>
+	</f:facet>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl> 
+	<h:form>
+		<p:menubar>
+		<p:menuitem>ADMINISTRADOR ESTILO</p:menuitem>
+		<p:submenu style="margin-left:75%;" label="#{beanLogin.nombre}" icon="fa fa-user">
+            	<p:menuitem value="Salir" action="#{beanLogin.salirSistema()}"/>
+        	</p:submenu>
+		</p:menubar>
+	</h:form>
+	<h:form id="form1">
+		<p:messages>
+			<p:autoUpdate />
+		</p:messages>
+		<p:panel collapsed="#{beanEstilo.panelColapsado_Estilo}">
+			<f:facet name="header">
+				<p:commandButton value="Nuevo Estilo" icon="fa fa-plus"
+					update="@form"
+					actionListener="#{beanEstilo.actionListenerColapsarPanel_Estilo()}"></p:commandButton>
+			</f:facet>
+			<p:panelGrid columns="2">
+				<h:outputText value="Nombre" />
+				<p:inputText value="#{beanEstilo.estilo.nombre}"></p:inputText>
+				<p:commandButton value="Insertar" icon="fa fa-save"
+					update="@form, :form2"
+					actionListener="#{beanEstilo.actionListenerInsertarEstilo()}"></p:commandButton>
+			</p:panelGrid>
+		</p:panel>
+	</h:form>
+	<br />
+	<h:form id="form2">
+		<p:panel header="Datos del Estilo">
+			<p:dataTable value="#{beanEstilo.listaEstilo}" reflow="true"
+				var="estilo" paginator="true" rows="5">
+				<p:column headerText="ID" filterBy="#{estilo.idEstilo}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{estilo.idEstilo}" />
+				</p:column>
+				<p:column headerText="Nombre" filterBy="#{estilo.nombre}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{estilo.nombre}" />
+				</p:column>
+				<p:column headerText="OPCIONES" priority="1">
+					<p:commandButton icon="fa fa-close" title="Eliminar" update="@form"
+						actionListener="#{beanEstilo.actionListenerEliminarEstilo(estilo.idEstilo)}">
+						<p:confirm header="Confirmación" message="Desea eliminar?"
+							icon="fa fa-exclamation-triangle"></p:confirm>
+					</p:commandButton>
+					<p:commandButton icon="fa fa-edit" title="Editar"
+						actionListener="#{beanEstilo.actionListenerSeleccionarEstilo(estilo)}"
+						update=":formEdicion" oncomplete="PF('dlgEdicion').show();"></p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+	
+	<br />
+	<h:form>
+	<p:commandButton value="Inicio" action="/Usuario_administrador/index_admin"
+					icon="fa fa-home">
+				</p:commandButton >
+	</h:form>
+	<p:dialog header="Editar información" widgetVar="dlgEdicion"
+		modal="true">
+		<h:form id="formEdicion">
+			<p:growl>
+				<p:autoUpdate></p:autoUpdate>
+			</p:growl>
+			<h:outputText value="ID: " />
+			<h:outputText value="#{beanEstilo.estiloSeleccionado.idEstilo}" />
+			<p:panelGrid columns="2">
+				<h:outputText value="Nombre" />
+				<p:inputText
+					value="#{beanEstilo.estiloSeleccionado.nombre}"></p:inputText>
+			</p:panelGrid>
+			<p:commandButton value="Actualizar" icon="fa fa-save"
+				update="@form, :form2"
+				actionListener="#{beanEstilo.actionListenerActualizarEstilo()}"></p:commandButton>
+		</h:form>
+	</p:dialog>
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="Sí" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check"></p:commandButton>
+		<p:commandButton value="No" type="button"
+			styleClass="ui-confirmdialog-no" icon="fa fa-times"></p:commandButton>
+	</p:confirmDialog>
+</body>
+</html>
+	

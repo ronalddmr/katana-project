@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:p="http://primefaces.org/ui">
+      
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no"></meta>
+		<title>Logo Camiseta</title>
+	</f:facet>
+</h:head> 
+<body> 
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form>
+		<p:menubar>
+		<p:menuitem>ADMINISTRADOR LOGO</p:menuitem>
+		<p:submenu style="margin-left:75%;" label="#{beanLogin.nombre}" icon="fa fa-user">
+            	<p:menuitem value="Salir" action="#{beanLogin.salirSistema()}"/>
+        	</p:submenu>
+		</p:menubar>
+	</h:form>
+<h:form id="form1">
+		<p:messages>
+			<p:autoUpdate />
+		</p:messages>
+		<p:panel collapsed="#{beanLogo.panelColapsado_Logo}">
+			<f:facet name="header">
+				<p:commandButton value="Nuevo Logo" icon="fa fa-plus"
+					update="@form"
+					actionListener="#{beanLogo.actionListenerColapsarPanel_Logo()}"></p:commandButton>
+			</f:facet>
+			<p:panelGrid columns="2">
+				<h:outputText value="Imagen" />
+				<p:inputText value="#{beanLogo.logo.imagen}"></p:inputText>
+				<h:outputText value="Precio" />
+				<p:spinner value="#{beanLogo.logo.precio}" stepFactor="0.01" 
+				min="0" size="10"></p:spinner>
+				<p:commandButton value="Insertar" icon="fa fa-save"
+					update="@form, :form2"
+					actionListener="#{beanLogo.actionListenerInsertarLogo()}"></p:commandButton>
+			</p:panelGrid>
+		</p:panel>
+	</h:form>	
+	<br></br>
+	<h:form id="form2">
+		<p:panel header="Datos del Logo">
+			<p:dataTable value="#{beanLogo.listaLogo}" reflow="true"
+				var="logo" paginator="true" rows="5">
+				<p:column headerText="ID" filterBy="#{estilo.idLogo}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{logo.idLogo}" />
+				</p:column>
+				<p:column headerText="Imagen" 
+					filterMatchMode="contains" priority="1">
+					<h:graphicImage style="width:150px; heigth:150px" url="#{logo.imagen}" />
+				</p:column>
+				<p:column headerText="Precio" filterBy="#{logo.precio}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{logo.precio}" />
+				</p:column>
+				<p:column headerText="OPCIONES" priority="1">
+					<p:commandButton icon="fa fa-close" title="Eliminar" update="@form"
+						actionListener="#{beanLogo.actionListenerEliminarLogo(logo.idLogo)}">
+						<p:confirm header="Confirmación" message="Desea eliminar?"
+							icon="fa fa-exclamation-triangle"></p:confirm>
+					</p:commandButton>
+					<p:commandButton icon="fa fa-edit" title="Editar"
+						actionListener="#{beanLogo.actionListenerSeleccionarLogo(logo)}"
+						update=":formEdicion" oncomplete="PF('dlgEdicion').show();"></p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+	<br />
+	<h:form>
+	<p:commandButton value="Inicio" action="/Usuario_administrador/index_admin"
+					icon="fa fa-home">
+				</p:commandButton >
+	</h:form>
+	<p:dialog header="Editar información" widgetVar="dlgEdicion"
+		modal="true">
+		<h:form id="formEdicion">
+			<p:growl>
+				<p:autoUpdate></p:autoUpdate>
+			</p:growl>
+			<h:outputText value="ID: " />
+			<h:outputText value="#{beanLogo.logoSeleccionado.idLogo}" />
+			<p:panelGrid columns="2">
+				<h:outputText value="Imagen" />
+				<p:inputText
+					value="#{beanLogo.logoSeleccionado.imagen}"></p:inputText>
+					<h:outputText value="Precio" />
+					<p:spinner value="#{beanLogo.logoSeleccionado.precio}" stepFactor="0.01" 
+					min="0" size="10"></p:spinner>
+			</p:panelGrid>
+			<p:commandButton value="Actualizar" icon="fa fa-save"
+				update="@form, :form2"
+				actionListener="#{beanLogo.actionListenerActualizarLogo()}"></p:commandButton>
+		</h:form>
+	</p:dialog>
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="Sí" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check"></p:commandButton>
+		<p:commandButton value="No" type="button"
+			styleClass="ui-confirmdialog-no" icon="fa fa-times"></p:commandButton>
+	</p:confirmDialog>
+</body> 
+</html>

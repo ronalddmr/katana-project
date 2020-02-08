@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no"></meta>
+		<title>Empresa</title>
+	</f:facet>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form>
+		<p:menubar>
+			<p:menuitem>ADMINISTRADOR EMPRESA</p:menuitem>
+			<p:submenu style="margin-left:75%;" label="#{beanLogin.nombre}" icon="fa fa-user">
+            	<p:menuitem value="Salir" action="#{beanLogin.salirSistema()}"/>
+        	</p:submenu>
+		</p:menubar>
+	</h:form>
+	<h:form>
+		<p:messages>
+			<p:autoUpdate />
+		</p:messages>
+		<p:panel collapsed="#{beanColor.panelColapsado_Color}"> 
+		<f:facet name="header">
+				<p:commandButton value="Nuevo Color" icon="fa fa-plus"
+					update="@form"
+					actionListener="#{beanColor.actionListenerColapsarPanel_Color()}"></p:commandButton>
+			</f:facet>
+		<p:panelGrid columns="6"
+			columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4"
+			styleClass="customPanelGrid" contentStyleClass="ui-fluid">
+
+			<p:outputLabel value="Nombre" />
+			<p:inputText value="#{beanEmpresa.empresa.nombre}" />
+
+			<h:outputLabel value="Provincia" />
+			<p:selectOneMenu value="#{beanEmpresa.idProvincia}">
+				<f:selectItems value="#{beanEmpresa.listaprovincias}" var="m"
+					itemLabel="#{m.nombre}" itemValue="#{m.idDivpolitica}" />
+				<p:ajax event="change"
+					listener="#{beanEmpresa.actionListenerCantones()}"
+					update="Cantones" />
+			</p:selectOneMenu>
+
+
+			<h:outputText value="Canton" />
+			<p:selectOneMenu value="#{beanEmpresa.idCanton}" id="Cantones">
+				<f:selectItems value="#{beanEmpresa.listaCantonesProvincia}" var="p"
+					itemLabel="#{p.nombre}" itemValue="#{p.idDivpolitica}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel value="Vision" />
+			<p:inputTextarea value="#{beanEmpresa.empresa.vision}" />
+
+			<p:outputLabel value="Direccion" />
+			<p:inputText value="#{beanEmpresa.empresa.direccion}" />
+
+			<p:outputLabel value="Referencia" />
+			<p:inputText value="#{beanEmpresa.empresa.referencia}" />
+
+			<p:outputLabel value="Mision" />
+			<p:inputTextarea value="#{beanEmpresa.empresa.mision}" />
+
+			<p:outputLabel value="Telefono" />
+			<p:inputText value="#{beanEmpresa.empresa.telefono1}" />
+
+			<p:outputLabel value="Celular" />
+			<p:inputText value="#{beanEmpresa.empresa.telefono2}" />
+
+
+			<p:commandButton value="Insertar" icon="fa fa-save"
+				actionListener="#{beanEmpresa.actionListenerInsertarEmpresa()}"></p:commandButton>
+
+
+
+		</p:panelGrid>
+		</p:panel>
+	</h:form>
+
+
+	<br></br>
+
+
+	<h:form id="form">
+		<p:dataScroller value="#{beanEmpresa.listaEmpresa}" var="emp"
+			chunkSize="10">
+			<f:facet name="header">
+            INFORMACION DE LA EMPRESA
+        </f:facet>
+
+			<h:panelGrid columns="2" style="width:80%"
+				columnClasses="logo,detail">
+
+
+				<p:outputPanel>
+					<h:panelGrid columns="2" cellpadding="6">
+						<h:outputText value="Nombre:" style="font-weight: bold" />
+						<h:outputText value="#{emp.nombre}" />
+
+						<h:outputText value="Lugar:" style="font-weight: bold" />
+						<h:outputText value="#{emp.pedDivpolitica.nombre}" />
+
+						<h:outputText value="Direccion:" style="font-weight: bold" />
+						<h:outputText value="#{emp.direccion}" />
+
+						<h:outputText value="Referencia:" style="font-weight: bold" />
+						<h:outputText value="#{emp.referencia}" />
+
+
+						<h:outputText value="Telefono:" style="font-weight: bold" />
+						<h:outputText value="#{emp.telefono1}" />
+
+						<h:outputText value="Celular:" style="font-weight: bold" />
+						<h:outputText value="#{emp.telefono2}" />
+
+					</h:panelGrid>
+				</p:outputPanel>
+			</h:panelGrid>
+			<h:form>
+				<h:panelGrid columns="2" cellpadding="20">
+					<p:panel header="Mision" style="margin-bottom:20px">
+						<h:panelGrid cellpadding="10">
+							<h:outputText value="#{emp.mision}" />
+						</h:panelGrid>
+					</p:panel>
+
+
+					<p:panel header="Vision" style="margin-bottom:20px">
+						<h:panelGrid cellpadding="10">
+							<h:outputText value="#{emp.vision}" />
+						</h:panelGrid>
+					</p:panel>
+				</h:panelGrid>
+			</h:form>
+			<p:commandButton icon="fa fa-edit" value="Editar Informacion"
+				actionListener="#{beanEmpresa.actionListenerSeleccionarEmpresa(emp)}"
+				update=":formEdicion" oncomplete="PF('dlgEdicion').show();"></p:commandButton>
+				
+				
+
+		</p:dataScroller>
+	</h:form>
+	<br />
+	<h:form>
+	<p:commandButton value="Inicio" action="/Usuario_administrador/index_admin"
+					icon="fa fa-home">
+				</p:commandButton >
+	</h:form>
+
+	<p:dialog header="Editar información" widgetVar="dlgEdicion"
+		modal="true">
+		<h:form id="formEdicion">
+			<p:growl>
+				<p:autoUpdate></p:autoUpdate>
+			</p:growl>
+			<h:outputText value="ID: " />
+			<h:outputText value="#{beanEmpresa.empresaSeleccionada.idEmpresa}" />
+			<p:panelGrid columns="4">
+				<h:outputText value="Nombre" />
+				<p:inputText value="#{beanEmpresa.empresaSeleccionada.nombre}"></p:inputText>
+
+
+				<h:outputLabel value="Provincia" />
+				<p:selectOneMenu value="#{beanEmpresa.empresaSeleccionada.pedDivpolitica.idDivpolitica}">
+					<f:selectItems value="#{beanEmpresa.listaprovincias}" var="p"
+						itemLabel="#{p.nombre}" itemValue="#{p.idDivpolitica}" />
+					<p:ajax event="change"
+						listener="#{beanEmpresa.actionListenerCantones()}"
+						update="Cantones" />
+				</p:selectOneMenu>
+
+
+				<h:outputText value="Canton" />
+				<p:selectOneMenu value="#{beanEmpresa.idCanton}" id="Cantones">
+					<f:selectItems value="#{beanEmpresa.listaCantonesProvincia}"
+						var="p" itemLabel="#{p.nombre}" itemValue="#{p.idDivpolitica}" />
+				</p:selectOneMenu>
+
+				<h:outputText value="Direccion" />
+				<p:inputText value="#{beanEmpresa.empresaSeleccionada.direccion}"></p:inputText>
+
+				<h:outputText value="Referencia" />
+				<p:inputText value="#{beanEmpresa.empresaSeleccionada.referencia}"></p:inputText>
+
+				<h:outputText value="Telefono" />
+				<p:inputText value="#{beanEmpresa.empresaSeleccionada.telefono1}"></p:inputText>
+
+				<h:outputText value="Celular" />
+				<p:inputText value="#{beanEmpresa.empresaSeleccionada.telefono2}"></p:inputText>
+
+				<h:outputText value="Vision" />
+				<p:inputTextarea value="#{beanEmpresa.empresaSeleccionada.vision}"></p:inputTextarea>
+
+				<h:outputText value="Mision" />
+				<p:inputText value="#{beanEmpresa.empresaSeleccionada.mision}"></p:inputText>
+
+			</p:panelGrid>
+			<p:commandButton value="Actualizar" icon="fa fa-save"
+			update="@form, :form"
+				actionListener="#{beanEmpresa.actionListenerActualizarEmpresa()}"></p:commandButton>
+		</h:form>
+	</p:dialog>
+
+
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="Sí" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check"></p:commandButton>
+		<p:commandButton value="No" type="button"
+			styleClass="ui-confirmdialog-no" icon="fa fa-times"></p:commandButton>
+	</p:confirmDialog>
+
+
+</body>
+
+</html>

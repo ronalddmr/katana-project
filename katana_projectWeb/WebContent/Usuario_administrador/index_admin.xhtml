@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Opciones supervisor</title>
+</h:head>
+
+
+
+<body>
+<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form>
+
+
+		<p:sidebar widgetVar="sidebar3" position="top" baseZIndex="10000">
+			<h1 style="font-weight: normal">Top Sidebar</h1>
+		</p:sidebar>
+		<h:form>
+		<p:menubar>
+			<p:menuitem>ADMINISTRADOR</p:menuitem>
+			<p:submenu style="margin-left:80%;" label="#{beanLogin.nombre}"
+				icon="fa fa-user">
+				<p:menuitem value="Salir" action="#{beanLogin.salirSistema()}" />
+			</p:submenu>
+		</p:menubar>
+		</h:form>
+		
+		<p:megaMenu orientation="vertical" style="margin-top:20px">
+			<p:menuitem value="Empresa" action="/auditoria/aud-empresa"
+				icon="fa fa-building"></p:menuitem>
+			<p:menuitem value="Logo" action="product_logo"
+				icon="fa fa-area-chart"></p:menuitem>
+			<p:menuitem value="Camisetas" action="product_shirt"
+				icon="fa fa-shirtsinbulk"></p:menuitem>
+			<p:menuitem value="Estilo" action="product_style" icon="fa fa-star"></p:menuitem>
+			<p:menuitem value="Tipo" action="product_type"
+				icon="fa fa-paint-brush"></p:menuitem>
+			<p:menuitem value="Talla" action="product_size"
+				icon="fa fa-transgender"></p:menuitem>
+			<p:menuitem value="Color" action="product_color"
+				icon="fa fa-pie-chart"></p:menuitem>
+			<p:menuitem value="Iva" action="product_iva" icon="fa fa-usd"></p:menuitem>
+			<p:menuitem value="Producto" action="product_katana"
+				icon="fa fa-shopping-cart"></p:menuitem>
+			<p:menuitem value="Catalogo" action="product_catalogue"
+				icon="fa fa-book"></p:menuitem>
+			<p:menuitem value="Estado Pedidos" action="order_status"
+				icon="fa fa-bar-chart"></p:menuitem>
+			<p:menuitem value="Detalles Producto" action="product_detail"
+				icon="fa fa-cart-plus"></p:menuitem>
+			<p:menuitem value="Roles" action="roles" icon="fa fa-slideshare"></p:menuitem>
+			<p:menuitem value="Registro Usuarios" action="user_register"
+				icon="fa fa-user-plus"></p:menuitem>
+			<p:menuitem value="Roles Sistema" action="user_role"
+				icon="fa fa-users"></p:menuitem>
+
+
+		</p:megaMenu>
+
+	</h:form>
+	<br />
+
+	<p:messages id="mensajes"></p:messages>
+
+</body>
+</html>
+
