@@ -23,9 +23,58 @@
 	<link rel="stylesheet" type="text/css" href="../../css/util.css" />
 	<link rel="stylesheet" type="text/css" href="../../css/main.css" />
 	<!--===============================================================================================-->
+	
+		<link rel="stylesheet" type="text/css"
+		href="../../vendor/bootstrap/css/bootstrap.min.css" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"
+		href="../../fonts/font-awesome-4.7.0/css/font-awesome.min.css" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"
+		href="../../fonts/themify/themify-icons.css" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"
+		href="../../fonts/Linearicons-Free-v1.0.0/icon-font.min.css" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"
+		href="../../fonts/elegant-font/html-css/style.css" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"
+		href="../../vendor/animate/animate.css" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"
+		href="../../vendor/css-hamburgers/hamburgers.min.css" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"
+		href="../../vendor/animsition/css/animsition.min.css" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"
+		href="../../vendor/select2/select2.min.css" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"
+		href="../../vendor/daterangepicker/daterangepicker.css" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/slick/slick.css" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"
+		href="../../vendor/lightbox2/css/lightbox.min.css" />
+	<!--===============================================================================================-->
+
 
 </h:head>
 <h:body>
+
+<!--===============================================================================================-->
+	<script type="text/javascript" src="../..vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+	<script type="text/javascript"
+		src="../..vendor/animsition/js/animsition.min.js"></script>
+	<!--===============================================================================================-->
+	<script type="text/javascript" src="../..vendor/bootstrap/js/popper.js"></script>
+	<script type="text/javascript"
+		src="../../vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!--===============================================================================================-->
+	<script type="text/javascript" src="../../vendor/select2/select2.min.js"></script>
 
 
 	<!-- Header -->
@@ -62,72 +111,70 @@
 						</ul>
 					</nav>
 				</div>
-
+				
 				<!-- Header Icon -->
-				<div class="header-icons">
-					<a href="#" class="header-wrapicon1 dis-block"> <img src="../images/icons/icon-header-01.png"
-							class="header-icon1" alt="ICON" />
-					</a> <span class="linedivide1"></span>
+			<div class="header-icons">
 
-					<div class="header-wrapicon2">
-						<img src="../../images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown"
-							alt="ICON" /> <span class="header-icons-noti">3</span>
+				<div class="header-wrapicon2">
+					<img src="../../images/icons/icon-header-02.png"
+						class="header-icon1 js-show-header-dropdown" alt="ICON" /> <span
+						class="header-icons-noti">#{beanDetalle_Producto.cantidad_carrito}</span>
 
-						<!-- Header cart noti -->
-						<div class="header-cart header-dropdown">
-							<ul class="header-cart-wrapitem">
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-										<img src="../../images/item-cart-01.jpg" alt="IMG" />
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name"> White Shirt With
-											Pleat Detail Back </a> <span class="header-cart-item-info">
-											1 x $19.00 </span>
-									</div>
-								</li>
-
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-										<img src="../../images/item-cart-02.jpg" alt="IMG" />
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name"> Converse All
-											Star Hi Black Canvas </a> <span class="header-cart-item-info">
-											1 x $39.00 </span>
-									</div>
-								</li>
-
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-										<img src="../../images/item-cart-03.jpg" alt="IMG" />
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name"> Nixon Porter
-											Leather Watch In Tan </a> <span class="header-cart-item-info">
-											1 x $17.00 </span>
-									</div>
-								</li>
-							</ul>
-
-							<div class="header-cart-total">Total: $75.00</div>
-
-							<div class="header-cart-buttons">
+					<!-- Header cart noti -->
+					<div class="header-cart header-dropdown">
+						<ul class="header-cart-wrapitem">
+							<li class="header-cart-item">
+								
+									<p:dataList value="#{beanDetalle_Producto.listadetalle}"
+										var="detalle" type="definition">
+										<f:facet name="header">
+                                          Productos en el Carrito
+                                 </f:facet>
+                              
+                                         Producto: #{detalle.proCatalogo.proProducto.nombre} Cantidad: #{detalle.cantidadDetalle}
+                                         
+                                     <f:facet name="description">
+											<p:graphicImage style="width:60px; heigth:60px"
+												url="#{detalle.proCatalogo.proProducto.imagen1}" />
+											<p:commandButton value="Quitar del carrito" title="Eliminar"
+												update="@form"
+												actionListener="#{beanDetalle_Producto.actionListenerEliminarDetalle(detalle.idDetalle)}">
+											</p:commandButton>
+										</f:facet>
+									</p:dataList>
+						
+							</li>
 
 
-								<div class="header-cart-wrapbtn">
-									<!-- Button -->
-									<a href="../carrito.xhtml"
-										class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-										Ver carrito </a>
-								</div>
+
+
+						</ul>
+
+						<div class="header-cart-total">Total: $#{beanDetalle_Producto.valor_compra}</div>
+
+						<div class="header-cart-buttons">
+							<div class="header-cart-wrapbtn">
+								<!-- Button -->
+								<a href="./Usuario_final/carrito.xhtml"
+									class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									Ver carrito </a>
 							</div>
+
 						</div>
 					</div>
 				</div>
+				<span class="linedivide1"></span>
+				<ul>
+					<li><a href="../../login/iniciar_sesion.xhtml">Iniciar Sesion
+					</a></li>
+					<li><a href="../registro/index.xhtml">Registro</a>
+					</li>
+				</ul>
+				<!-- <a href="#" class="header-wrapicon1 dis-block">
+						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON" />
+					</a> -->
+			</div>
+	
 			</div>
 		</div>
 	</header>
@@ -253,6 +300,45 @@
 
 
 	<script src="../../resource/js/registro.js" />
+	
+	<script type="text/javascript">
+		$(".selection-1").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect1')
+		});
+	</script>
+	<!--===============================================================================================-->
+	<script type="text/javascript" src="../../vendor/slick/slick.min.js"></script>
+	<script type="text/javascript" src="../../js/slick-custom.js"></script>
+	<!--===============================================================================================-->
+	<script type="text/javascript"
+		src="../../vendor/countdowntime/countdowntime.js"></script>
+	<!--===============================================================================================-->
+	<script type="text/javascript"
+		src="../../vendor/lightbox2/js/lightbox.min.js"></script>
+	<!--===============================================================================================-->
+	<script type="text/javascript"
+		src="../../vendor/sweetalert/sweetalert.min.js"></script>
+	<script type="text/javascript">
+		$('.block2-btn-addcart').each(function () {
+			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+			$(this).on('click', function () {
+				swal(nameProduct, "is added to cart !", "success");
+			});
+		});
+
+		$('.block2-btn-addwishlist').each(function () {
+			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+			$(this).on('click', function () {
+				swal(nameProduct, "is added to wishlist !", "success");
+			});
+		});
+	</script>
+
+	<!--===============================================================================================-->
+	<script src="../../js/main.js"></script>
+	
+	
 	</h:body>
 
 </html>
