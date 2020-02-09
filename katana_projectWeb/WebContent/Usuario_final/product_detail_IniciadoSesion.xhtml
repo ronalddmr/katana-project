@@ -2,7 +2,9 @@
 <!DOCTYPE html
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 	<title>Productos</title>
 	<meta charset="UTF-8" />
@@ -100,30 +102,42 @@
 				<div class="header-wrapicon2">
 					<img src="../images/icons/icon-header-02.png"
 						class="header-icon1 js-show-header-dropdown" alt="ICON" /> <span
-						class="header-icons-noti">3</span>
+						class="header-icons-noti">#{beanDetalle_Producto.cantidad_carrito}</span>
 
 					<!-- Header cart noti -->
 					<div class="header-cart header-dropdown">
 						<ul class="header-cart-wrapitem">
-							<li class="header-cart-item">
-								<div class="header-cart-item-img">
-									<img src="../images/item-cart-01.jpg" alt="IMG" />
-								</div>
+							<li class="header-cart-item"><p:dataList
+									value="#{beanDetalle_Producto.listadetalle}" var="detalle"
+									type="definition">
+									<f:facet name="header">
+                                          Productos en el Carrito
+                                 </f:facet>
+                              
+                                         Producto: #{detalle.proCatalogo.proProducto.nombre} Cantidad: #{detalle.cantidadDetalle}
+                                         
+                                     <f:facet name="description">
+										<p:graphicImage style="width:60px; heigth:60px"
+											url="#{detalle.proCatalogo.proProducto.imagen1}" />
+										<p:commandButton value="Quitar del carrito" title="Eliminar"
+											update="@form"
+											actionListener="#{beanDetalle_Producto.actionListenerEliminarDetalle(detalle.idDetalle)}">
+										</p:commandButton>
+									</f:facet>
+								</p:dataList></li>
 
-								<div class="header-cart-item-txt">
-									<a href="#" class="header-cart-item-name"> White Shirt With
-										Pleat Detail Back </a> <span class="header-cart-item-info">
-										1 x $19.00 </span>
-								</div>
-							</li>
+
+
+
 						</ul>
 
-						<div class="header-cart-total">Total: $75.00</div>
+						<div class="header-cart-total">Total:
+							$#{beanDetalle_Producto.valor_compra}</div>
 
 						<div class="header-cart-buttons">
 							<div class="header-cart-wrapbtn">
 								<!-- Button -->
-								<a href="./ventas/index.xhtml"
+								<a href="./Usuario_final/carrito.xhtml"
 									class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 									Ver carrito </a>
 							</div>
@@ -133,17 +147,18 @@
 				</div>
 				<span class="linedivide1"></span>
 				<ul class="main_menu">
-					
-						<li><a><h:outputText value="#{beanLogin.nombre}" /></a>
-							<ul class="sub_menu">
-								<li><a href="user_profile.xhtml">Perfil</a></li>
-								<li><a href="#">Configuracion</a></li>
-								<h:form>
-								<li><a><h:commandButton value="Salir" action="#{beanLogin.salirSistema()}"/></a></li>
-								</h:form>
-							</ul></li>
-					
-					</ul>
+
+					<li><a><h:outputText value="#{beanLogin.nombre}" /></a>
+						<ul class="sub_menu">
+							<li><a href="./user_profile.xhtml">Perfil</a></li>
+
+							<h:form>
+								<li><a><h:commandButton value="Salir"
+											action="#{beanLogin.salirSistema()}" /></a></li>
+							</h:form>
+						</ul></li>
+
+				</ul>
 				<!-- <a href="#" class="header-wrapicon1 dis-block">
 						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON" />
 					</a> -->
@@ -160,163 +175,161 @@
 	<br />
 	<br />
 	<div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">
-		<a href="/katana_projectWeb/faces/landingPage.xhtml" class="s-text16"> Home <i
+		<a href="/katana_projectWeb/faces/landingPage.xhtml" class="s-text16">
+			Home <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
+		</a> <a href="/katana_projectWeb/faces/Usuario_final/index_products.xhtml"
+			class="s-text16"> Camisetas <i
 			class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
-		</a> <a href="/katana_projectWeb/faces/Usuario_final/index_products.xhtml" class="s-text16"> Camisetas <i
-			class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
-		</a> <span class="s-text17"> 
-			<h:outputText value="#{beanCatalogo.catalogoSeleccionado.proProducto.nombre}" />
-		 </span>
+		</a> <span class="s-text17"> <h:outputText
+				value="#{beanCatalogo.catalogoSeleccionado.proProducto.nombre}" />
+		</span>
 	</div>
 
 	<hr />
 
-	<!-- Product Detail -->
 	<div class="container bgwhite p-t-35 p-b-80">
-		<div class="flex-w flex-sb">
-			<div class="w-size13 p-t-30 respon5">
-				<div class="wrap-slick3 flex-sb flex-w">
-					<div class="wrap-slick3-dots">
-					</div>
-
-					<div class="slick3">
-						<div class="item-slick3">
-							<div class="wrap-pic-w">
-								<h:graphicImage style="width:550px; heigth:750px"
-									url="#{beanCatalogo.catalogoSeleccionado.proProducto.imagen1}" />
+			<div class="flex-w flex-sb">
+				<div class="w-size13 p-t-30 respon5">
+					<div class="wrap-slick3 flex-sb flex-w">
+						<div class="wrap-slick3-dots">
+						</div>
+	
+						<div class="slick3">
+							<div class="item-slick3">
+								<div class="wrap-pic-w">
+									<h:graphicImage style="width:550px; heigth:750px"
+										url="#{beanCatalogo.catalogoSeleccionado.proProducto.imagen1}" />
+								</div>
 							</div>
-						</div>
-
-						<div class="item-slick3">
-							<div class="wrap-pic-w">
-
-								<h:graphicImage style="width:550px; heigth:750px"
-									url="#{beanCatalogo.catalogoSeleccionado.proProducto.imagen2}" />
+	
+							<div class="item-slick3">
+								<div class="wrap-pic-w">
+	
+									<h:graphicImage style="width:550px; heigth:750px"
+										url="#{beanCatalogo.catalogoSeleccionado.proProducto.imagen2}" />
+								</div>
 							</div>
-						</div>
-
-						<div class="item-slick3">
-							<div class="wrap-pic-w">
-								<h:graphicImage style="width:550px; heigth:750px"
-									url="#{beanCatalogo.catalogoSeleccionado.proProducto.imagen3}" />
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="w-size14 p-t-30 respon5">
-				<h4 class="product-detail-name m-text16 p-b-13">
-					<h:outputText
-						value="#{beanCatalogo.catalogoSeleccionado.proProducto.nombre}"></h:outputText>
-				</h4>
-
-				<span class="m-text17"> <h:outputText
-						value="$ #{beanCatalogo.catalogoSeleccionado.precio}"></h:outputText>
-				</span>
-
-				<!--  -->
-				<div class="p-t-33 p-b-60">
-					<div class="flex-m flex-w p-b-10">
-						<div class="s-text15 w-size15 t-center">Size</div>
-
-						<div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
-							<select class="selection-2" name="size">
-								<option>
-									<h:outputText
-										value="#{beanCatalogo.catalogoSeleccionado.proProducto.proTalla.descripcion}" />
-								</option>
-							</select>
-						</div>
-					</div>
-
-					<div class="flex-m flex-w">
-						<div class="s-text15 w-size15 t-center">Color</div>
-
-						<div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
-							<select class="selection-2" name="color">
-								<option>
-									<h:outputText
-										value="#{beanCatalogo.catalogoSeleccionado.proProducto.proColor.nombre}" />
-								</option>
-
-							</select>
-						</div>
-					</div>
-
-					<div class="flex-r-m flex-w p-t-10">
-						<div class="w-size16 flex-m flex-w">
-							<div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
-								<button
-									class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
-									<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
-								</button>
-
-								<input class="size8 m-text18 t-center num-product" type="number"
-									name="num-product" value="1" />
-
-								<button
-									class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
-									<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
-								</button>
-							</div>
-
-							<div
-								class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
-								<!-- Button -->
-								<button
-									class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-									Add to Cart</button>
+	
+							<div class="item-slick3">
+								<div class="wrap-pic-w">
+									<h:graphicImage style="width:550px; heigth:750px"
+										url="#{beanCatalogo.catalogoSeleccionado.proProducto.imagen3}" />
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
-				<div class="p-b-45">
-					
-						<div class="s-text8">Categoria: 
-						<h:outputText value="#{beanCatalogo.catalogoSeleccionado.proProducto.proTipoProducto.nombre}" />
+	
+				<div class="w-size14 p-t-30 respon5">
+					<h4 class="product-detail-name m-text16 p-b-13">
+						<h:outputText
+							value="#{beanCatalogo.catalogoSeleccionado.proProducto.nombre}"></h:outputText>
+					</h4>
+	
+					<span class="m-text17"> <h:outputText
+							value="$ #{beanCatalogo.catalogoSeleccionado.precio}"></h:outputText>
+					</span>
+	
+					<!--  -->
+					<div class="p-t-33 p-b-60">
+						<div class="flex-m flex-w p-b-10">
+							<div class="s-text15 w-size15 t-center">Size</div>
+	
+							<div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
+								<select class="selection-2" name="size">
+									<option>
+										<h:outputText
+											value="#{beanCatalogo.catalogoSeleccionado.proProducto.proTalla.descripcion}" />
+									</option>
+								</select>
+							</div>
 						</div>
-				</div>
-
-				<!--  -->
-				<div
-					class="wrap-dropdown-content bo6 p-t-15 p-b-14 active-dropdown-content">
-					<h5
-						class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
-						Description <i class="down-mark fs-12 color1 fa fa-minus dis-none"
-							aria-hidden="true"></i> <i
-							class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
-					</h5>
-
-					<div class="dropdown-content dis-none p-t-15 p-b-23">
-						<p class="s-text8">
-							<h:outputText
-								value="#{beanCatalogo.catalogoSeleccionado.proProducto.descripcion}" />
-						</p>
+	
+	
+						<div class="flex-m flex-w">
+							<div class="s-text15 w-size15 t-center">Color</div>
+							<div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
+								<select class="selection-2" name="color">
+									<option>
+										<h:outputText
+											value="#{beanCatalogo.catalogoSeleccionado.proProducto.proColor.nombre}" />
+									</option>
+	
+								</select>
+							</div>
+						</div>
+	
+						<div class="flex-r-m flex-w p-t-10">
+	
+							<div class="w-size16 flex-m flex-w">
+	
+								<div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
+									<!-- <button
+									
+										 -->
+									<p:spinner id="minMax"
+										value="#{beanDetalle_Producto.detalle.cantidadDetalle}" min="1"
+										max="#{beanCatalogo.catalogoSeleccionado.cantidad}" />
+								</div>
+	
+								<div
+									class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
+									<!-- Button -->
+	
+									<p:commandButton value="Añadir al Carrito" 
+										actionListener="#{beanDetalle_Producto.actionListenerInsertarDetalle(beanCatalogo.catalogoSeleccionado)}"></p:commandButton>
+									<!-- <button
+										class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+										Añadir al carrito</button> -->
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
-
-
-				<div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
-					<h5
-						class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
-						Reviews (32) <i
-							class="down-mark fs-12 color1 fa fa-minus dis-none"
-							aria-hidden="true"></i> <i
-							class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
-					</h5>
-
-					<div class="dropdown-content dis-none p-t-15 p-b-23">
-						<p class="s-text8">Fusce ornare mi vel risus porttitor
-							dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit.
-							Proin gravida arcu nisl, a dignissim mauris placerat</p>
+	
+					<div class="p-b-45">
+						
+							<div class="s-text8">Categoria: 
+							<h:outputText value="#{beanCatalogo.catalogoSeleccionado.proProducto.proTipoProducto.nombre}" />
+							</div>
+					</div>
+	
+					<!--  -->
+					<div
+						class="wrap-dropdown-content bo6 p-t-15 p-b-14 active-dropdown-content">
+						<h5
+							class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
+							Description <i class="down-mark fs-12 color1 fa fa-minus dis-none"
+								aria-hidden="true"></i> <i
+								class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
+						</h5>
+	
+						<div class="dropdown-content dis-none p-t-15 p-b-23">
+							<p class="s-text8">
+								<h:outputText
+									value="#{beanCatalogo.catalogoSeleccionado.proProducto.descripcion}" />
+							</p>
+						</div>
+					</div>
+	
+	
+					<div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
+						<h5
+							class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
+							Reviews (32) <i
+								class="down-mark fs-12 color1 fa fa-minus dis-none"
+								aria-hidden="true"></i> <i
+								class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
+						</h5>
+	
+						<div class="dropdown-content dis-none p-t-15 p-b-23">
+							<p class="s-text8">Fusce ornare mi vel risus porttitor
+								dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit.
+								Proin gravida arcu nisl, a dignissim mauris placerat</p>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-
 
 	<!-- New Product -->
 	<section class="newproduct bgwhite p-t-45 p-b-105">

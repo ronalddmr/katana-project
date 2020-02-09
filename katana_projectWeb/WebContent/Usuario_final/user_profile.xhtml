@@ -3,7 +3,8 @@
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	<title>Perfil</title>
 	<meta charset="UTF-8" />
@@ -106,56 +107,44 @@
 			<div class="header-icons">
 
 				<div class="header-wrapicon2">
-					<img src="images/icons/icon-header-02.png"
+					<img src="../images/icons/icon-header-02.png"
 						class="header-icon1 js-show-header-dropdown" alt="ICON" /> <span
-						class="header-icons-noti">3</span>
+						class="header-icons-noti">#{beanDetalle_Producto.cantidad_carrito}</span>
 
 					<!-- Header cart noti -->
 					<div class="header-cart header-dropdown">
 						<ul class="header-cart-wrapitem">
-							<li class="header-cart-item">
-								<div class="header-cart-item-img">
-									<img src="images/item-cart-01.jpg" alt="IMG" />
-								</div>
+							<li class="header-cart-item"><p:dataList
+									value="#{beanDetalle_Producto.listadetalle}" var="detalle"
+									type="definition">
+									<f:facet name="header">
+                                          Productos en el Carrito
+                                 </f:facet>
+                              
+                                         Producto: #{detalle.proCatalogo.proProducto.nombre} Cantidad: #{detalle.cantidadDetalle}
+                                         
+                                     <f:facet name="description">
+										<p:graphicImage style="width:60px; heigth:60px"
+											url="#{detalle.proCatalogo.proProducto.imagen1}" />
+										<p:commandButton value="Quitar del carrito" title="Eliminar"
+											update="@form"
+											actionListener="#{beanDetalle_Producto.actionListenerEliminarDetalle(detalle.idDetalle)}">
+										</p:commandButton>
+									</f:facet>
+								</p:dataList></li>
 
-								<div class="header-cart-item-txt">
-									<a href="#" class="header-cart-item-name"> White Shirt With
-										Pleat Detail Back </a> <span class="header-cart-item-info">
-										1 x $19.00 </span>
-								</div>
-							</li>
 
-							<li class="header-cart-item">
-								<div class="header-cart-item-img">
-									<img src="images/item-cart-02.jpg" alt="IMG" />
-								</div>
 
-								<div class="header-cart-item-txt">
-									<a href="#" class="header-cart-item-name"> Converse All
-										Star Hi Black Canvas </a> <span class="header-cart-item-info">
-										1 x $39.00 </span>
-								</div>
-							</li>
 
-							<li class="header-cart-item">
-								<div class="header-cart-item-img">
-									<img src="images/item-cart-03.jpg" alt="IMG" />
-								</div>
-
-								<div class="header-cart-item-txt">
-									<a href="#" class="header-cart-item-name"> Nixon Porter
-										Leather Watch In Tan </a> <span class="header-cart-item-info">
-										1 x $17.00 </span>
-								</div>
-							</li>
 						</ul>
 
-						<div class="header-cart-total">Total: $75.00</div>
+						<div class="header-cart-total">Total:
+							$#{beanDetalle_Producto.valor_compra}</div>
 
 						<div class="header-cart-buttons">
 							<div class="header-cart-wrapbtn">
 								<!-- Button -->
-								<a href="./ventas/index.xhtml"
+								<a href="./carritoIniciadoSesion.xhtml"
 									class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 									Ver carrito </a>
 							</div>
@@ -164,23 +153,18 @@
 					</div>
 				</div>
 				<span class="linedivide1"></span>
-				<div class="wrap_menu">
-					<nav class="menu">
-					<ul class="main_menu">
-					
-						<li><a><h:outputText value="#{beanLogin.loginDTO.usuario}" /></a>
-							<ul class="sub_menu">
-								<!-- <li><a href="#">Perfil</a></li> NO TIENE SENTIDO-->
-								<!-- <li><a href="#">Configuracion</a></li> TODO VA A HACER AQUI MISMO-->
-								<h:form>
-								<li><a><h:commandButton value="Salir" action="#{beanLogin.salirSistema()}"/></a></li>
-								</h:form>
-							</ul></li>
-					
-					</ul>
+				<ul class="main_menu">
 
-					</nav>
-				</div>
+					<li><a><h:outputText value="#{beanLogin.nombre}" /></a>
+						<ul class="sub_menu">
+							
+							<h:form>
+								<li><a><h:commandButton value="Salir"
+											action="#{beanLogin.salirSistema()}" /></a></li>
+							</h:form>
+						</ul></li>
+
+				</ul>
 				<!-- <a href="#" class="header-wrapicon1 dis-block">
 						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON" />
 					</a> -->

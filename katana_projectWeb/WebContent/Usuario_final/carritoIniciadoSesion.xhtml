@@ -83,7 +83,7 @@
 	<div class="container-menu-header">
 		<div class="wrap_header">
 			<!-- Logo -->
-			<a href="../landingPage.xhtml" class="logo"> <img
+			<a href="../landingPageIniciadoSesion.xhtml" class="logo"> <img
 				style="width: 200px; height: 600px !important;"
 				src="../images/katanaimg/katanalogo.png" alt="IMG-LOGO" />
 			</a>
@@ -112,19 +112,22 @@
 				</nav>
 			</div>
 
+			<!-- Header Icon -->
 			<div class="header-icons">
-
 				
 				<span class="linedivide1"></span>
-				<ul>
-					<li><a href="../login/iniciar_sesion.xhtml">Iniciar Sesion
-					</a></li>
-					<li><a href="./registro/index.xhtml">Registro</a>
-					</li>
-				</ul>
-				<!-- <a href="#" class="header-wrapicon1 dis-block">
-						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON" />
-					</a> -->
+				<ul class="main_menu">
+					
+						<li><a><h:outputText value="#{beanLogin.nombre}" /></a>
+							<ul class="sub_menu">
+								<li><a href="./user_profile.xhtml">Perfil</a></li>
+								
+								<h:form>
+								<li><a><h:commandButton value="Salir" action="#{beanLogin.salirSistema()}"/></a></li>
+								</h:form>
+							</ul></li>
+					
+					</ul>
 			</div>
 		</div>
 	</div>
