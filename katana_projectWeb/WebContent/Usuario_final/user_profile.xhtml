@@ -73,7 +73,7 @@
 	<div class="container-menu-header">
 		<div class="wrap_header">
 			<!-- Logo -->
-			<a href="#" class="logo"> <img
+			<a href="../landingPageIniciadoSesion.xhtml" class="logo"> <img
 				style="width: 200px; height: 600px !important;"
 				src="../../images/katanaimg/katanalogo.png" alt="IMG-LOGO" />
 			</a>
@@ -82,9 +82,9 @@
 			<div class="wrap_menu">
 				<nav class="menu">
 				<ul class="main_menu">
-					<li class="sale-noti"><a href="product.html">Mujer</a></li>
+					<li><a href="product.html">Chicas</a></li>
 
-					<li><a href="product.html">Hombre</a></li>
+					<li class="sale-noti"><a href="product.html">Chicos</a></li>
 
 					<li><a href="cart.html">Unisex</a></li>
 					<li><a href="index.html">Camisetas</a>
@@ -94,16 +94,11 @@
 							<li><a href="#">Peliculas</a></li>
 							<li><a href="#">Personalizada</a></li>
 						</ul></li>
-					<li><a href="index.html">Acessorios</a>
-						<ul class="sub_menu">
-							<li><a href="#">Bandas Musicales</a></li>
-							<li><a href="#">Series</a></li>
-							<li><a href="#">Peliculas</a></li>
-							<li><a href="#">Memes</a></li>
-						</ul></li>
-					<li><a href="about.html">Quienes somos</a></li>
-				</ul>
 
+					<li><a href="about.html">Quienes somos</a></li>
+
+					<li><a href="contact.html">Contactos</a></li>
+				</ul>
 				</nav>
 			</div>
 
@@ -175,8 +170,8 @@
 					
 						<li><a><h:outputText value="#{beanLogin.loginDTO.usuario}" /></a>
 							<ul class="sub_menu">
-								<li><a href="#">Perfil</a></li>
-								<li><a href="#">Configuracion</a></li>
+								<!-- <li><a href="#">Perfil</a></li> NO TIENE SENTIDO-->
+								<!-- <li><a href="#">Configuracion</a></li> TODO VA A HACER AQUI MISMO-->
 								<h:form>
 								<li><a><h:commandButton value="Salir" action="#{beanLogin.salirSistema()}"/></a></li>
 								</h:form>

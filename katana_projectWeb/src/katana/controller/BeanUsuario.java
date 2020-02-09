@@ -73,7 +73,7 @@ public class BeanUsuario implements Serializable {
 			managerUsuario.insertarUsuario(usuario);
 			listaUsuario = managerUsuario.findAllUsuarios();
 			usuario=managerUsuario.findUsuarioById(managerUsuario.findIdUsuarioMayor());
-			/*El numero 2 es porque en mi caso */
+			/*El numero 2 es porque en mi caso ese es por defecto*/
 			rol=managerRol.findRolById(2);
 			managerUsuario.insertarUsuarioRol(rol, usuario);
 			listaUsuarioRol = managerUsuario.findAllUsuariosRol();
@@ -85,7 +85,7 @@ public class BeanUsuario implements Serializable {
 			e.printStackTrace();
 		}
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		return "/clientes/index.xhtml?faces-redirect=true";
+		return "/login/iniciar_sesion?faces-redirect=true";
 	}
 
 	public void actionListenerSeleccionarUsuario(UsuUsuario usuario) {

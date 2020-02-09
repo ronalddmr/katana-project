@@ -2,53 +2,45 @@
 <!DOCTYPE html
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:head>
-	<title>Katana</title>
+	<title>Productos</title>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="images/icons/favicon.png" />
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css"
-		href="vendor/bootstrap/css/bootstrap.min.css" />
+		href="../vendor/bootstrap/css/bootstrap.min.css" />
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css"
-		href="fonts/font-awesome-4.7.0/css/font-awesome.min.css" />
+		href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css" />
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css"
-		href="fonts/themify/themify-icons.css" />
+		href="../fonts/themify/themify-icons.css" />
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css"
-		href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css" />
+		href="../fonts/Linearicons-Free-v1.0.0/icon-font.min.css" />
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css"
-		href="fonts/elegant-font/html-css/style.css" />
+		href="../fonts/elegant-font/html-css/style.css" />
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css"
-		href="vendor/animate/animate.css" />
+		href="../vendor/animate/animate.css" />
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css"
-		href="vendor/css-hamburgers/hamburgers.min.css" />
+		href="../vendor/css-hamburgers/hamburgers.min.css" />
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css"
-		href="vendor/animsition/css/animsition.min.css" />
+		href="../vendor/animsition/css/animsition.min.css" />
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css"
-		href="vendor/select2/select2.min.css" />
+		href="../vendor/select2/select2.min.css" />
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="vendor/daterangepicker/daterangepicker.css" />
+	<link rel="stylesheet" type="text/css" href="../vendor/slick/slick.css" />
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/slick/slick.css" />
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="vendor/lightbox2/css/lightbox.min.css" />
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css" />
-	<link rel="stylesheet" type="text/css" href="css/main.css" />
+	<link rel="stylesheet" type="text/css" href="../css/util.css" />
+	<link rel="stylesheet" type="text/css" href="../css/main.css" />
 	<!--===============================================================================================-->
 </h:head>
 
@@ -56,26 +48,26 @@
 
 
 	<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript"
+		src="../vendor/jquery/jquery-3.2.1.min.js"></script>
 	<!--===============================================================================================-->
 	<script type="text/javascript"
-		src="vendor/animsition/js/animsition.min.js"></script>
+		src="../vendor/animsition/js/animsition.min.js"></script>
 	<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/bootstrap/js/popper.js"></script>
+	<script type="text/javascript" src="../vendor/bootstrap/js/popper.js"></script>
 	<script type="text/javascript"
-		src="vendor/bootstrap/js/bootstrap.min.js"></script>
+		src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 	<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/select2/select2.min.js"></script>
-
+	<script type="text/javascript" src="../vendor/select2/select2.min.js"></script>
 
 	<!-- Header -->
 	<header class="header1"> <!-- Header desktop -->
 	<div class="container-menu-header">
 		<div class="wrap_header">
 			<!-- Logo -->
-			<a href="#" class="logo"> <img
+			<a href="../../landingPageIniciadoSesion.xhtml" class="logo"> <img
 				style="width: 200px; height: 600px !important;"
-				src="images/katanaimg/katanalogo.png" alt="IMG-LOGO" />
+				src="../images/katanaimg/katanalogo.png" alt="IMG-LOGO" />
 			</a>
 
 			<!-- Menu -->
@@ -101,50 +93,37 @@
 				</ul>
 				</nav>
 			</div>
+
 			<!-- Header Icon -->
 			<div class="header-icons">
 
 				<div class="header-wrapicon2">
-					<img src="images/icons/icon-header-02.png"
+					<img src="../images/icons/icon-header-02.png"
 						class="header-icon1 js-show-header-dropdown" alt="ICON" /> <span
-						class="header-icons-noti">#{beanDetalle_Producto.cantidad_carrito}</span>
+						class="header-icons-noti">3</span>
 
 					<!-- Header cart noti -->
 					<div class="header-cart header-dropdown">
 						<ul class="header-cart-wrapitem">
 							<li class="header-cart-item">
-								
-									<p:dataList value="#{beanDetalle_Producto.listadetalle}"
-										var="detalle" type="definition">
-										<f:facet name="header">
-                                          Productos en el Carrito
-                                 </f:facet>
-                              
-                                         Producto: #{detalle.proCatalogo.proProducto.nombre} Cantidad: #{detalle.cantidadDetalle}
-                                         
-                                     <f:facet name="description">
-											<p:graphicImage style="width:60px; heigth:60px"
-												url="#{detalle.proCatalogo.proProducto.imagen1}" />
-											<p:commandButton value="Quitar del carrito" title="Eliminar"
-												update="@form"
-												actionListener="#{beanDetalle_Producto.actionListenerEliminarDetalle(detalle.idDetalle)}">
-											</p:commandButton>
-										</f:facet>
-									</p:dataList>
-						
+								<div class="header-cart-item-img">
+									<img src="../images/item-cart-01.jpg" alt="IMG" />
+								</div>
+
+								<div class="header-cart-item-txt">
+									<a href="#" class="header-cart-item-name"> White Shirt With
+										Pleat Detail Back </a> <span class="header-cart-item-info">
+										1 x $19.00 </span>
+								</div>
 							</li>
-
-
-
-
 						</ul>
 
-						<div class="header-cart-total">Total: $#{beanDetalle_Producto.valor_compra}</div>
+						<div class="header-cart-total">Total: $75.00</div>
 
 						<div class="header-cart-buttons">
 							<div class="header-cart-wrapbtn">
 								<!-- Button -->
-								<a href="./Usuario_final/carrito.xhtml"
+								<a href="./ventas/index.xhtml"
 									class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 									Ver carrito </a>
 							</div>
@@ -153,12 +132,18 @@
 					</div>
 				</div>
 				<span class="linedivide1"></span>
-				<ul>
-					<li><a href="./login/iniciar_sesion.xhtml">Iniciar Sesion
-					</a></li>
-					<li><a href="./Usuario_final/registro/index.xhtml">Registro</a>
-					</li>
-				</ul>
+				<ul class="main_menu">
+					
+						<li><a><h:outputText value="#{beanLogin.nombre}" /></a>
+							<ul class="sub_menu">
+								<li><a href="user_profile.xhtml">Perfil</a></li>
+								<li><a href="#">Configuracion</a></li>
+								<h:form>
+								<li><a><h:commandButton value="Salir" action="#{beanLogin.salirSistema()}"/></a></li>
+								</h:form>
+							</ul></li>
+					
+					</ul>
 				<!-- <a href="#" class="header-wrapicon1 dis-block">
 						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON" />
 					</a> -->
@@ -168,79 +153,170 @@
 	</header>
 
 
-	<!-- Slide1 -->
-	<section class="slide1">
-	<div class="wrap-slick1">
-		<div class="slick1">
-			<div class="item-slick1 item1-slick1"
-				style="background-image: url(images/master-slide-02.jpg);">
-				<div
-					class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
-					<span
-						class="caption1-slide1 m-text1 t-center animated visible-false m-b-15"
-						data-appear="fadeInDown"> Coleccion 2020 </span>
 
-					<h2
-						class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37"
-						data-appear="fadeInUp">Nuevos Modelo</h2>
+	<!-- breadcrumb -->
+	<br />
+	<br />
+	<br />
+	<br />
+	<div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">
+		<a href="/katana_projectWeb/faces/landingPage.xhtml" class="s-text16"> Home <i
+			class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
+		</a> <a href="/katana_projectWeb/faces/Usuario_final/index_products.xhtml" class="s-text16"> Camisetas <i
+			class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
+		</a> <span class="s-text17"> 
+			<h:outputText value="#{beanCatalogo.catalogoSeleccionado.proProducto.nombre}" />
+		 </span>
+	</div>
 
-					<div class="wrap-btn-slide1 w-size1 animated visible-false"
-						data-appear="zoomIn">
-						<!-- Button -->
-						<a href="./Usuario_final/index_products.xhtml"
-							class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
-							Comprar ahora </a>
+	<hr />
+
+	<!-- Product Detail -->
+	<div class="container bgwhite p-t-35 p-b-80">
+		<div class="flex-w flex-sb">
+			<div class="w-size13 p-t-30 respon5">
+				<div class="wrap-slick3 flex-sb flex-w">
+					<div class="wrap-slick3-dots">
+					</div>
+
+					<div class="slick3">
+						<div class="item-slick3">
+							<div class="wrap-pic-w">
+								<h:graphicImage style="width:550px; heigth:750px"
+									url="#{beanCatalogo.catalogoSeleccionado.proProducto.imagen1}" />
+							</div>
+						</div>
+
+						<div class="item-slick3">
+							<div class="wrap-pic-w">
+
+								<h:graphicImage style="width:550px; heigth:750px"
+									url="#{beanCatalogo.catalogoSeleccionado.proProducto.imagen2}" />
+							</div>
+						</div>
+
+						<div class="item-slick3">
+							<div class="wrap-pic-w">
+								<h:graphicImage style="width:550px; heigth:750px"
+									url="#{beanCatalogo.catalogoSeleccionado.proProducto.imagen3}" />
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="item-slick1 item2-slick1"
-				style="background-image: url(images/master-slide-03.jpg);">
+			<div class="w-size14 p-t-30 respon5">
+				<h4 class="product-detail-name m-text16 p-b-13">
+					<h:outputText
+						value="#{beanCatalogo.catalogoSeleccionado.proProducto.nombre}"></h:outputText>
+				</h4>
+
+				<span class="m-text17"> <h:outputText
+						value="$ #{beanCatalogo.catalogoSeleccionado.precio}"></h:outputText>
+				</span>
+
+				<!--  -->
+				<div class="p-t-33 p-b-60">
+					<div class="flex-m flex-w p-b-10">
+						<div class="s-text15 w-size15 t-center">Size</div>
+
+						<div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
+							<select class="selection-2" name="size">
+								<option>
+									<h:outputText
+										value="#{beanCatalogo.catalogoSeleccionado.proProducto.proTalla.descripcion}" />
+								</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="flex-m flex-w">
+						<div class="s-text15 w-size15 t-center">Color</div>
+
+						<div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
+							<select class="selection-2" name="color">
+								<option>
+									<h:outputText
+										value="#{beanCatalogo.catalogoSeleccionado.proProducto.proColor.nombre}" />
+								</option>
+
+							</select>
+						</div>
+					</div>
+
+					<div class="flex-r-m flex-w p-t-10">
+						<div class="w-size16 flex-m flex-w">
+							<div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
+								<button
+									class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
+									<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
+								</button>
+
+								<input class="size8 m-text18 t-center num-product" type="number"
+									name="num-product" value="1" />
+
+								<button
+									class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
+									<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
+								</button>
+							</div>
+
+							<div
+								class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
+								<!-- Button -->
+								<button
+									class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+									Add to Cart</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="p-b-45">
+					
+						<div class="s-text8">Categoria: 
+						<h:outputText value="#{beanCatalogo.catalogoSeleccionado.proProducto.proTipoProducto.nombre}" />
+						</div>
+				</div>
+
+				<!--  -->
 				<div
-					class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
-					<span
-						class="caption1-slide1 m-text1 t-center animated visible-false m-b-15"
-						data-appear="rollIn"> Nueva Funcionalidad </span>
+					class="wrap-dropdown-content bo6 p-t-15 p-b-14 active-dropdown-content">
+					<h5
+						class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
+						Description <i class="down-mark fs-12 color1 fa fa-minus dis-none"
+							aria-hidden="true"></i> <i
+							class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
+					</h5>
 
-					<h2
-						class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37"
-						data-appear="lightSpeedIn">Personaliza tu camiseta</h2>
+					<div class="dropdown-content dis-none p-t-15 p-b-23">
+						<p class="s-text8">
+							<h:outputText
+								value="#{beanCatalogo.catalogoSeleccionado.proProducto.descripcion}" />
+						</p>
+					</div>
+				</div>
 
-					<div class="wrap-btn-slide1 w-size1 animated visible-false"
-						data-appear="slideInUp">
-						<!-- Button -->
-						<a href="Usuario_final/personalizar/customize_tshirt.xhtml"
-							class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
-							Pincha aqui </a>
+
+				<div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
+					<h5
+						class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
+						Reviews (32) <i
+							class="down-mark fs-12 color1 fa fa-minus dis-none"
+							aria-hidden="true"></i> <i
+							class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
+					</h5>
+
+					<div class="dropdown-content dis-none p-t-15 p-b-23">
+						<p class="s-text8">Fusce ornare mi vel risus porttitor
+							dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit.
+							Proin gravida arcu nisl, a dignissim mauris placerat</p>
 					</div>
 				</div>
 			</div>
-
-			<div class="item-slick1 item3-slick1"
-				style="background-image: url(images/katanaimg/ofertasymas.jpg);">
-				<div
-					class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
-					<span
-						class="caption1-slide1 m-text1 t-center animated visible-false m-b-15"
-						data-appear="rotateInDownLeft"> Ofertas y mas </span>
-
-					<h2
-						class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37"
-						data-appear="rotateInUpRight">No te lo puedes perder</h2>
-
-					<div class="wrap-btn-slide1 w-size1 animated visible-false"
-						data-appear="rotateIn">
-						<!-- Button -->
-						<a href="./Usuario_final/index_products.xhtml"
-							class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
-							Comprar ahora </a>
-					</div>
-				</div>
-			</div>
-
 		</div>
 	</div>
-	</section>
+
 
 	<!-- New Product -->
 	<section class="newproduct bgwhite p-t-45 p-b-105">
@@ -258,146 +334,7 @@
 					<div class="block2">
 						<div
 							class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-
-							<img src="images/item-02.jpg" alt="IMG-PRODUCT" />
-
-							<div class="block2-overlay trans-0-4">
-								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-									<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-									<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-								</a>
-
-								<div class="block2-btn-addcart w-size1 trans-0-4">
-
-									<!-- Button -->
-									<a href="./Usuario_administrador/product-detail.xhtml">
-										<button
-											class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-											Ver Producto</button>
-									</a>
-								</div>
-							</div>
-						</div>
-
-						<div class="block2-txt p-t-20">
-							<a href="./Usuario_administrador/product-detail.xhtml"
-								class="block2-name dis-block s-text3 p-b-5"> Herschel supply
-								co 25l </a> <span class="block2-price m-text6 p-r-5"> $75.00
-							</span>
-						</div>
-					</div>
-				</div>
-
-				<div class="item-slick2 p-l-15 p-r-15">
-					<!-- Block2 -->
-					<div class="block2">
-						<div
-							class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-
-							<img src="images/item-02.jpg" alt="IMG-PRODUCT" />
-
-							<div class="block2-overlay trans-0-4">
-								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-									<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-									<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-								</a>
-
-								<div class="block2-btn-addcart w-size1 trans-0-4">
-
-									<!-- Button -->
-									<a href="./Usuario_administrador/product-detail.xhtml">
-										<button
-											class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-											Ver Producto</button>
-									</a>
-								</div>
-							</div>
-						</div>
-
-						<div class="block2-txt p-t-20">
-							<a href="./Usuario_administrador/product-detail.xhtml"
-								class="block2-name dis-block s-text3 p-b-5"> Herschel supply
-								co 25l </a> <span class="block2-price m-text6 p-r-5"> $75.00
-							</span>
-						</div>
-					</div>
-				</div>
-
-				<div class="item-slick2 p-l-15 p-r-15">
-					<!-- Block2 -->
-					<div class="block2">
-						<div
-							class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-
-							<img src="images/item-02.jpg" alt="IMG-PRODUCT" />
-
-							<div class="block2-overlay trans-0-4">
-								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-									<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-									<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-								</a>
-
-								<div class="block2-btn-addcart w-size1 trans-0-4">
-
-									<!-- Button -->
-									<a href="./Usuario_administrador/product-detail.xhtml">
-										<button
-											class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-											Ver Producto</button>
-									</a>
-								</div>
-							</div>
-						</div>
-
-						<div class="block2-txt p-t-20">
-							<a href="./Usuario_administrador/product-detail.xhtml"
-								class="block2-name dis-block s-text3 p-b-5"> Herschel supply
-								co 25l </a> <span class="block2-price m-text6 p-r-5"> $75.00
-							</span>
-						</div>
-					</div>
-				</div>
-
-				<div class="item-slick2 p-l-15 p-r-15">
-					<!-- Block2 -->
-					<div class="block2">
-						<div
-							class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-
-							<img src="images/item-02.jpg" alt="IMG-PRODUCT" />
-
-							<div class="block2-overlay trans-0-4">
-								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-									<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-									<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-								</a>
-
-								<div class="block2-btn-addcart w-size1 trans-0-4">
-
-									<!-- Button -->
-									<a href="./Usuario_administrador/product-detail.xhtml">
-										<button
-											class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-											Ver Producto</button>
-									</a>
-								</div>
-							</div>
-						</div>
-
-						<div class="block2-txt p-t-20">
-							<a href="./Usuario_administrador/product-detail.xhtml"
-								class="block2-name dis-block s-text3 p-b-5"> Herschel supply
-								co 25l </a> <span class="block2-price m-text6 p-r-5"> $75.00
-							</span>
-						</div>
-					</div>
-				</div>
-				<div class="item-slick2 p-l-15 p-r-15">
-					<!-- Block2 -->
-					<div class="block2">
-						<div
-							class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-							<img src="images/item-02.jpg" alt="IMG-PRODUCT" />
+							<img src="../images/item-02.jpg" alt="IMG-PRODUCT" />
 
 							<div class="block2-overlay trans-0-4">
 								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -415,10 +352,9 @@
 						</div>
 
 						<div class="block2-txt p-t-20">
-							<a href="./Usuario_administrador/product-detail.xhtml"
-								class="block2-name dis-block s-text3 p-b-5"> Herschel supply
-								co 25l </a> <span class="block2-price m-text6 p-r-5"> $75.00
-							</span>
+							<a href="#" class="block2-name dis-block s-text3 p-b-5">
+								Herschel supply co 25l </a> <span class="block2-price m-text6 p-r-5">
+								$75.00 </span>
 						</div>
 					</div>
 				</div>
@@ -427,7 +363,7 @@
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-img wrap-pic-w of-hidden pos-relative">
-							<img src="images/item-03.jpg" alt="IMG-PRODUCT" />
+							<img src="../images/item-03.jpg" alt="IMG-PRODUCT" />
 
 							<div class="block2-overlay trans-0-4">
 								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -445,7 +381,7 @@
 						</div>
 
 						<div class="block2-txt p-t-20">
-							<a href="./Usuario_administrador/product-detail.xhtml"
+							<a href="product-detail.html"
 								class="block2-name dis-block s-text3 p-b-5"> Denim jacket
 								blue </a> <span class="block2-price m-text6 p-r-5"> $92.50 </span>
 						</div>
@@ -456,7 +392,7 @@
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-img wrap-pic-w of-hidden pos-relative">
-							<img src="images/item-05.jpg" alt="IMG-PRODUCT" />
+							<img src="../images/item-05.jpg" alt="IMG-PRODUCT" />
 
 							<div class="block2-overlay trans-0-4">
 								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -474,7 +410,7 @@
 						</div>
 
 						<div class="block2-txt p-t-20">
-							<a href="./Usuario_administrador/product-detail.xhtml"
+							<a href="product-detail.html"
 								class="block2-name dis-block s-text3 p-b-5"> Coach slim
 								easton black </a> <span class="block2-price m-text6 p-r-5">
 								$165.90 </span>
@@ -487,7 +423,7 @@
 					<div class="block2">
 						<div
 							class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-							<img src="images/item-07.jpg" alt="IMG-PRODUCT" />
+							<img src="../images/item-07.jpg" alt="IMG-PRODUCT" />
 
 							<div class="block2-overlay trans-0-4">
 								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -505,7 +441,129 @@
 						</div>
 
 						<div class="block2-txt p-t-20">
-							<a href="./Usuario_administrador/product-detail.xhtml"
+							<a href="product-detail.html"
+								class="block2-name dis-block s-text3 p-b-5"> Frayed denim
+								shorts </a> <span class="block2-oldprice m-text7 p-r-5">
+								$29.50 </span> <span class="block2-newprice m-text8 p-r-5">
+								$15.90 </span>
+						</div>
+					</div>
+				</div>
+
+				<div class="item-slick2 p-l-15 p-r-15">
+					<!-- Block2 -->
+					<div class="block2">
+						<div
+							class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+							<img src="../images/item-02.jpg" alt="IMG-PRODUCT" />
+
+							<div class="block2-overlay trans-0-4">
+								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+									<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+									<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+								</a>
+
+								<div class="block2-btn-addcart w-size1 trans-0-4">
+									<!-- Button -->
+									<button
+										class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+										Add to Cart</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="block2-txt p-t-20">
+							<a href="product-detail.html"
+								class="block2-name dis-block s-text3 p-b-5"> Herschel supply
+								co 25l </a> <span class="block2-price m-text6 p-r-5"> $75.00
+							</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="item-slick2 p-l-15 p-r-15">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-img wrap-pic-w of-hidden pos-relative">
+							<img src="../images/item-03.jpg" alt="IMG-PRODUCT" />
+
+							<div class="block2-overlay trans-0-4">
+								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+									<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+									<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+								</a>
+
+								<div class="block2-btn-addcart w-size1 trans-0-4">
+									<!-- Button -->
+									<button
+										class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+										Add to Cart</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="block2-txt p-t-20">
+							<a href="product-detail.html"
+								class="block2-name dis-block s-text3 p-b-5"> Denim jacket
+								blue </a> <span class="block2-price m-text6 p-r-5"> $92.50 </span>
+						</div>
+					</div>
+				</div>
+
+				<div class="item-slick2 p-l-15 p-r-15">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-img wrap-pic-w of-hidden pos-relative">
+							<img src="../images/item-05.jpg" alt="IMG-PRODUCT" />
+
+							<div class="block2-overlay trans-0-4">
+								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+									<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+									<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+								</a>
+
+								<div class="block2-btn-addcart w-size1 trans-0-4">
+									<!-- Button -->
+									<button
+										class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+										Add to Cart</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="block2-txt p-t-20">
+							<a href="product-detail.html"
+								class="block2-name dis-block s-text3 p-b-5"> Coach slim
+								easton black </a> <span class="block2-price m-text6 p-r-5">
+								$165.90 </span>
+						</div>
+					</div>
+				</div>
+
+				<div class="item-slick2 p-l-15 p-r-15">
+					<!-- Block2 -->
+					<div class="block2">
+						<div
+							class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
+							<img src="../images/item-07.jpg" alt="IMG-PRODUCT" />
+
+							<div class="block2-overlay trans-0-4">
+								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+									<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+									<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+								</a>
+
+								<div class="block2-btn-addcart w-size1 trans-0-4">
+									<!-- Button -->
+									<button
+										class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+										Add to Cart</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="block2-txt p-t-20">
+							<a href="product-detail.html"
 								class="block2-name dis-block s-text3 p-b-5"> Frayed denim
 								shorts </a> <span class="block2-oldprice m-text7 p-r-5">
 								$29.50 </span> <span class="block2-newprice m-text8 p-r-5">
@@ -516,8 +574,7 @@
 
 			</div>
 			<!-- Button -->
-			<br /> <br /> <br /> <a
-				href="./Usuario_final/index_products.xhtml"
+			<br /> <br /> <br /> <a href="index_products.xhtml"
 				class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1"> Todos los
 				productos </a>
 		</div>
@@ -525,7 +582,6 @@
 	</div>
 
 	</section>
-
 
 
 	<!-- Footer -->
@@ -540,12 +596,8 @@
 					<p>
 						<b>Direccion: </b> Ibarra, Ecuador
 					</p>
-
-					<p>
-						<b>Contactos: </b> 0984910710 - 0982969718
-					</p>
+					<div class="flex-m p-t-30"></div>
 				</div>
-				<br />
 				<div>
 					<h4 class="s-text12 p-b-30">
 						Siguenos <br />
@@ -569,12 +621,10 @@
 				<h4 class="s-text12 p-b-30">Categorias</h4>
 
 				<ul>
-					<li class="p-b-9"><a href="#" class="s-text7"> Unisex </a></li>
-					<li class="p-b-9"><a href="#" class="s-text7"> Mujer </a></li>
+					<li class="p-b-9"><a href="#" class="s-text7"> Mujeres </a></li>
 
 					<li class="p-b-9"><a href="#" class="s-text7"> Hombre </a></li>
-					<li class="p-b-9"><a href="#" class="s-text7"> Camisetas </a>
-					</li>
+
 					<li class="p-b-9"><a href="#" class="s-text7"> Accesorios
 					</a></li>
 				</ul>
@@ -584,13 +634,12 @@
 				<h4 class="s-text12 p-b-30">Links</h4>
 
 				<ul>
-					<li class="p-b-9"><a href="#" class="s-text7"> Quienes
-							somos </a></li>
+					<li class="p-b-9"><a href="#" class="s-text7"> Search </a></li>
 
-					<li class="p-b-9"><a href="#" class="s-text7"> Contactos </a>
-					</li>
+					<li class="p-b-9"><a href="#" class="s-text7"> About Us </a></li>
 
-					<li class="p-b-9"><a href="#" class="s-text7"> Volver </a></li>
+					<li class="p-b-9"><a href="#" class="s-text7"> Contact Us
+					</a></li>
 
 					<li class="p-b-9"><a href="#" class="s-text7"> Returns </a></li>
 				</ul>
@@ -623,42 +672,57 @@
 		</div>
 
 		<div class="t-center p-l-15 p-r-15">
-			<a href="#"> <img class="h-size2" src="images/icons/paypal.png"
-				alt="IMG-PAYPAL" />
-			</a> <a href="#"> <img class="h-size2" src="images/icons/visa.png"
+			<a href="#"> <img class="h-size2"
+				src="../images/icons/paypal.png" alt="IMG-PAYPAL" />
+			</a> <a href="#"> <img class="h-size2" src="../images/icons/visa.png"
 				alt="IMG-VISA" />
 			</a> <a href="#"> <img class="h-size2"
-				src="images/icons/mastercard.png" alt="IMG-MASTERCARD" />
-			</a> <a href="#"> <img class="h-size2" src="images/icons/express.png"
-				alt="IMG-EXPRESS" />
+				src="../images/icons/mastercard.png" alt="IMG-MASTERCARD" />
 			</a> <a href="#"> <img class="h-size2"
-				src="images/icons/discover.png" alt="IMG-DISCOVER" />
+				src="../images/icons/express.png" alt="IMG-EXPRESS" />
+			</a> <a href="#"> <img class="h-size2"
+				src="../images/icons/discover.png" alt="IMG-DISCOVER" />
 			</a>
 
-			<div class="t-center s-text8 p-t-20">2020 | Katana Clothing</div>
+			<div class="t-center s-text8 p-t-20">Copyright © 2020 Todos los
+				derechos reservados.</div>
 		</div>
 	</div>
 
 	</footer>
+
+
+
+	<!-- Back to top -->
+	<div class="btn-back-to-top bg0-hov" id="myBtn">
+		<span class="symbol-btn-back-to-top"> <i
+			class="fa fa-angle-double-up" aria-hidden="true"></i>
+		</span>
+	</div>
+
+	<!-- Container Selection -->
+	<div id="dropDownSelect1"></div>
+	<div id="dropDownSelect2"></div>
+
+
 
 	<script type="text/javascript">
 		$(".selection-1").select2({
 			minimumResultsForSearch: 20,
 			dropdownParent: $('#dropDownSelect1')
 		});
+
+		$(".selection-2").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect2')
+		});
 	</script>
 	<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/slick/slick.min.js"></script>
-	<script type="text/javascript" src="js/slick-custom.js"></script>
+	<script type="text/javascript" src="../vendor/slick/slick.min.js"></script>
+	<script type="text/javascript" src="../js/slick-custom.js"></script>
 	<!--===============================================================================================-->
 	<script type="text/javascript"
-		src="vendor/countdowntime/countdowntime.js"></script>
-	<!--===============================================================================================-->
-	<script type="text/javascript"
-		src="vendor/lightbox2/js/lightbox.min.js"></script>
-	<!--===============================================================================================-->
-	<script type="text/javascript"
-		src="vendor/sweetalert/sweetalert.min.js"></script>
+		src="../vendor/sweetalert/sweetalert.min.js"></script>
 	<script type="text/javascript">
 		$('.block2-btn-addcart').each(function () {
 			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
@@ -673,10 +737,19 @@
 				swal(nameProduct, "is added to wishlist !", "success");
 			});
 		});
+
+		$('.btn-addcart-product-detail').each(function () {
+			var nameProduct = $('.product-detail-name').html();
+			$(this).on('click', function () {
+				swal(nameProduct, "is added to wishlist !", "success");
+			});
+		});
 	</script>
 
 	<!--===============================================================================================-->
-	<script src="js/main.js"></script>
+	<script src="../js/main.js"></script>
+
+
 
 </body>
 
