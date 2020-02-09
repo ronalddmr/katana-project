@@ -5,10 +5,13 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import katana.controller.JSFUtil;
+import katana.model.dto.LoginDTO;
 import katana.model.entities.ProColor;
 import katana.model.entities.ProTalla;
 import katana.model.entities.ProTipoProducto;
+import katana.model.manager.ManagerAuditoria;
 import katana.model.manager.ManagerProducto;
+import katana.model.manager.ManagerSeguridad;
 import katana.model.manager.ManagerTalla;
 
 import java.io.Serializable;
@@ -22,18 +25,21 @@ public class BeanTalla implements Serializable{
 	private ManagerTalla managerTalla;
 
 	private List<ProTalla> listaTalla;
-
 	private ProTalla talla;
-
 	private boolean panelColapsado_Talla;
 
 	private ProTalla tallaSeleccionada;
+	@EJB
+	private ManagerAuditoria managerAuditoria;
+
+	private LoginDTO loginDTO;
 	@PostConstruct
 	public void inicializar() 
 	{
 	    listaTalla=managerTalla.findAllTalla();
 	    talla=new ProTalla();
 	    panelColapsado_Talla=true;
+	
 	}	
 	
 /*BEAN PARA pro_talla*/
@@ -43,6 +49,9 @@ public class BeanTalla implements Serializable{
 	}
 	public void actionListenerInsertarTalla() {
 		try {
+		
+		//	managerAuditoria.crearEvento(loginDTO.getCodigoUsuario(),this.getClass(), "Aasfafa", "Aafsasf");
+
 			managerTalla.insertarTalla(talla);
 			listaTalla=managerTalla.findAllTalla();
 			talla = new  ProTalla();
@@ -103,6 +112,14 @@ public class BeanTalla implements Serializable{
 
 	public void setPanelColapsado_Talla(boolean panelColapsado_Talla) {
 		this.panelColapsado_Talla = panelColapsado_Talla;
+	}
+
+	public LoginDTO getLoginDTO() {
+		return loginDTO;
+	}
+
+	public void setLoginDTO(LoginDTO loginDTO) {
+		this.loginDTO = loginDTO;
 	}
 
 }

@@ -36,6 +36,7 @@ public class BeanProducto implements Serializable{
 	@PostConstruct
 	public void inicializar() 
 	{
+		loginDTO=new LoginDTO();
 	    listaTipoProducto=managerProducto.findAllTipoProducto();
 	    listaProducto = managerProducto.findAllProducto();
 	    tipo_producto=new ProTipoProducto();
@@ -46,7 +47,7 @@ public class BeanProducto implements Serializable{
 	/*BEAN PARA pro_producto*/
 	public void actionListenerInsertarProducto() {
 		try {
-			managerProducto.crearEventoPro(loginDTO.getCodigoUsuario(),this.getClass(), "Acceso Productos", "Insercion de Producto");
+			managerAuditoria.crearEvento(loginDTO.getCodigoUsuario(),this.getClass(), "Acceso Productos", "Insercion de Producto");
 			managerProducto.insertarProducto(producto);
 			listaProducto=managerProducto.findAllProducto();
 			producto=new ProProducto();
@@ -64,7 +65,8 @@ public class BeanProducto implements Serializable{
 	
 	public void actionListenerActualizarProducto() {
 		try {
-			managerProducto.crearEventoPro(loginDTO.getCodigoUsuario(),this.getClass(), "Acceso Productos", "Insercion de Producto");
+			
+			managerAuditoria.crearEvento(loginDTO.getCodigoUsuario(),this.getClass(), "Acceso Productos", "Actualizar Producto");
 			managerProducto.actualizarProducto(productoSeleccionado);
 			listaProducto=managerProducto.findAllProducto();
 			JSFUtil.crearMensajeInfo("Datos actualizados");
@@ -76,7 +78,7 @@ public class BeanProducto implements Serializable{
 	}
 	public void actionListenerEliminarProducto(int id) {
 		try {
-			managerProducto.crearEventoPro(loginDTO.getCodigoUsuario(),this.getClass(), "Acceso Productos", "Insercion de Producto");
+			managerAuditoria.crearEvento(loginDTO.getCodigoUsuario(),this.getClass(), "Acceso Productos", "Eliminacion de Producto");
 			managerProducto.eliminarProducto(id);
 			listaProducto=managerProducto.findAllProducto();
 			JSFUtil.crearMensajeInfo("Producto eliminado");
