@@ -41,6 +41,20 @@ public class ManagerPedido_Producto {
     	return q.getResultList();
     }
     
+    public PedPedido findPedidoByUltimoPedido() {
+    	List<PedPedido> lista_pedido=this.findAllPedido();
+    	int cont=0;
+    		for (PedPedido p: lista_pedido) 
+        	{
+        		if(p.getIdPedido()>cont) 
+        		{
+        			cont=p.getIdPedido();
+        		}
+        	} 
+    		
+    	return em.find(PedPedido.class, cont);
+    }
+    
     public PedPedido findPedidoById(int id) {
     	return em.find(PedPedido.class, id);
     }
@@ -52,7 +66,7 @@ public class ManagerPedido_Producto {
         ped.setBaseImponible(pedido.getBaseImponible());
         ped.setCostoEnvio(pedido.getCostoEnvio());
         ped.setDireccion(pedido.getDireccion());
-        ped.setFechaEntrega(ped.getFechaEntrega());
+        ped.setFechaEntrega(fecha);
         ped.setFechaPedido(fecha);
         ped.setFormaPago(pedido.getFormaPago());
         ped.setIdentificacion(pedido.getIdentificacion());

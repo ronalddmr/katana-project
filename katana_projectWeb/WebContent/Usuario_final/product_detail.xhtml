@@ -265,20 +265,20 @@
 						<div class="w-size16 flex-m flex-w">
 
 							<div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
-								<!-- <button
-								
-									 -->
-								<p:spinner id="minMax"
+							
+								<p:spinner id="minMax" 
 									value="#{beanDetalle_Producto.detalle.cantidadDetalle}" min="1"
-									max="#{beanCatalogo.catalogoSeleccionado.cantidad}" />
+									max="#{beanCatalogo.catalogoSeleccionado.cantidad}" stepFactor="1" />
+							
+							
 							</div>
 
 							<div
 								class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
 								<!-- Button -->
 
-								<p:commandButton value="Añadir al Carrito" update=":formList"
-									actionListener="#{beanDetalle_Producto.actionListenerInsertarDetalle(beanCatalogo.catalogoSeleccionado)}"></p:commandButton>
+								<h:commandButton styleClass="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" value="Añadir" 
+									action="#{beanDetalle_Producto.actionListenerInsertarDetalle(beanCatalogo.catalogoSeleccionado)}"></h:commandButton>
 								<!-- <button
 									class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
 									Añadir al carrito</button> -->

@@ -5,18 +5,19 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import katana.controller.JSFUtil;
-import katana.model.entities.AudEmpresa;
 import katana.model.entities.PedDetallePedido;
 import katana.model.entities.PedDivpolitica;
 import katana.model.entities.PedEstado;
 import katana.model.entities.PedPedido;
 import katana.model.entities.UsuUsuario;
 import katana.model.manager.ManagerDPA;
-import katana.model.manager.ManagerEmpresa;
+import katana.model.manager.ManagerDetalle_Pedido;
+import katana.model.manager.ManagerEstado;
 import katana.model.manager.ManagerPedido_Producto;
+import katana.model.manager.ManagerUsuario;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Named
@@ -27,12 +28,19 @@ public class BeanPedido implements Serializable{
 	private ManagerDPA managerDPA;
 	@EJB
 	private ManagerPedido_Producto managerPedido;
+	@EJB
+	private ManagerDetalle_Pedido managerdetalle;
+	@EJB
+	private ManagerUsuario managerusuario;
+	@EJB
+	private ManagerEstado managerestado;
 	
 	private List<PedPedido> listaPedido;
 	private List<PedDivpolitica> listaProvincias;
 	private List<PedDivpolitica> listaCantones;
 	private List<PedDivpolitica> listaCantonesProvincia;
 	private List<PedDetallePedido> listadetalle;
+	private List<PedEstado> listaestado;
 	
 	@Inject private BeanDetalle_Producto beandetalle_producto;
 	
@@ -51,6 +59,7 @@ public class BeanPedido implements Serializable{
 	public void inicializar() 
 	{
 		pedido=new PedPedido();
+		usuario=new UsuUsuario();
 		estado=new PedEstado();
 		locacion = new PedDivpolitica();
 		pedidoSeleccionado=new PedPedido();
@@ -59,6 +68,7 @@ public class BeanPedido implements Serializable{
 		listaProvincias = managerDPA.findAllProvincias();
 		listaCantones = managerDPA.findAllCantones();
 		listaPedido = managerPedido.findAllPedido();
+		listaestado=managerestado.findAllEstado();
 
 	}
 	
@@ -69,18 +79,52 @@ public class BeanPedido implements Serializable{
 	public void actionListenerCantones()
 	{
 		listaCantonesProvincia = managerDPA.findCantonesProvincia(listaCantones, idProvincia);
+		
 	}
 	
 	
 	
 	public void actionListenerInsertarPedido() {
 		try {
-			listadetalle=beandetalle_producto.getListadetalle();
-			beandetalle_producto.setListadetalle(null);
+			
+			 listadetalle=beandetalle_producto.getListadetalle();
+			  
+			 double total=0;
+			 double subtotal=0;
+			 double ivatotal=0;
+			for(int i=0; i<listadetalle.size() ;i++) 
+			{
+ 
+				subtotal=subtotal+listadetalle.get(i).getSubtotal().doubleValue();
+				ivatotal=ivatotal+listadetalle.get(i).getValorIva().doubleValue();
+				total=total+listadetalle.get(i).getTotalDetalle().doubleValue();
+			}
+			pedido.setSubtotal(new BigDecimal(subtotal));
+			pedido.setIvaTotal(new BigDecimal(ivatotal));
 			locacion = managerDPA.findDPA(idCanton);
+			if(idCanton.equals("1001")) 
+			{
+				pedido.setTotal(new BigDecimal(total+5));
+			}else 
+			{
+				pedido.setTotal(new BigDecimal(total));
+			}
+			pedido.setCostoEnvio(new BigDecimal(0));
+			pedido.setBaseImponible(new BigDecimal(ivatotal));
+			pedido.setBaseCero(new BigDecimal(0));
+			usuario=managerusuario.findUsuarioById(1);
+			pedido.setUsuUsuario(usuario);
 			managerPedido.insertarPedido(pedido, listadetalle, locacion, estado, usuario);
 			listaPedido = managerPedido.findAllPedido();
+			pedido=managerPedido.findPedidoByUltimoPedido();
+			for(int i=0; i<listadetalle.size() ;i++) 
+			{
+				managerdetalle.poneridPedido_detalle(listadetalle.get(i), pedido);
+			}
 			pedido=new PedPedido();
+			beandetalle_producto.setListadetalle(null);
+			beandetalle_producto.setCantidad_carrito(0);
+			beandetalle_producto.setValor_compra(0);
 			JSFUtil.crearMensajeInfo("El pedido se ha realizado con éxito");
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
@@ -235,6 +279,18 @@ public class BeanPedido implements Serializable{
 
 	public void setIdCanton(String idCanton) {
 		this.idCanton = idCanton;
+	}
+
+
+
+	public List<PedEstado> getListaestado() {
+		return listaestado;
+	}
+
+
+
+	public void setListaestado(List<PedEstado> listaestado) {
+		this.listaestado = listaestado;
 	}
 	
 	/*

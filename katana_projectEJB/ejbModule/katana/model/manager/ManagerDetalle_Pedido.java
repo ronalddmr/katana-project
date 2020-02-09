@@ -1,5 +1,6 @@
 package katana.model.manager;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -122,6 +123,36 @@ public class ManagerDetalle_Pedido {
     	em.merge(e);
     	
     }
-    
-    
+    public boolean actualizarDetalleCAntidad(List<PedDetallePedido> listadetalle,List<PedDetallePedido> listadetalle2, BigDecimal cantidad, ProCatalogo catalogo) throws Exception {
+    	for(int i=0; i<listadetalle.size() ;i++) 
+        {
+    		
+	            if(catalogo.getIdCatalogo()==listadetalle.get(i).getProCatalogo().getIdCatalogo()) 
+	            {
+	            	
+	            	BigDecimal Valor1 = listadetalle.get(i).getCantidadDetalle();
+	            	BigDecimal Valor2 = cantidad;
+	            	System.out.println("Valor1 "+Valor1);
+	            	System.out.println("Valor2 "+Valor2);
+	            	Valor2 = Valor2.add(Valor1);
+	            	System.out.println("Valor Total "+Valor2);
+	            	listadetalle.get(i).setCantidadDetalle(Valor2);
+	            	System.out.println("Lo que tiene la lista "+listadetalle.get(i).getCantidadDetalle());
+	            	listadetalle2=listadetalle;
+	            	em.merge(listadetalle.get(i));
+	            	return false;
+	            }
+        }
+    	return true;
+    	
+    }
+    public void poneridPedido_detalle(PedDetallePedido detalle, PedPedido pedido) throws Exception
+    {
+    	PedDetallePedido e=findDetallePedidoById(detalle.getIdDetalle());
+    	if(e==null)
+    		throw new Exception("No existe este detalle");
+    	e.setPedPedido(pedido);
+    	em.merge(e);
+    	
+    }
 }

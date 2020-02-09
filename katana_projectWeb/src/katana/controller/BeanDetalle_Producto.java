@@ -29,6 +29,7 @@ public class BeanDetalle_Producto implements Serializable{
 	
 	private List<PedDetallePedido> listadetalle_completa;
 	private List<PedDetallePedido> listadetalle=new ArrayList<>();
+	//private List<PedDetallePedido> listadetalle2=new ArrayList<>();
 	private PedDetallePedido detalle;
 	private PedPedido pedido;
 	private PedIva Iva;
@@ -53,25 +54,33 @@ public class BeanDetalle_Producto implements Serializable{
 
 	public void actionListenerInsertarDetalle(ProCatalogo catalogoSeleccionado) {
 		try {
-			catalogo=catalogoSeleccionado;
-			Iva=manager_iva.findIvaById(1);
-			detalle.setSubtotal(new BigDecimal(this.subtotalDetalle(detalle.getCantidadDetalle().intValue(), catalogo.getPrecio().doubleValue())));
-			detalle.setPrecioProducto(catalogo.getPrecio());
-			detalle.setPrecioDescuento(catalogo.getDescuento());
-			detalle.setValorIva(new BigDecimal(detalle.getSubtotal().doubleValue()*Iva.getCantidad().doubleValue()));
-			detalle.setTotalDetalle(new BigDecimal(detalle.getSubtotal().doubleValue()-catalogo.getDescuento().doubleValue()+detalle.getValorIva().doubleValue()));
-			manager_detalle.insertarDetalle(detalle,Iva, catalogo);
-			detalle=manager_detalle.findDetaleByUltimoDetalle();
-			listadetalle.add(detalle);
-			this.valorcompra();
-			cantidad_carrito=listadetalle.size();
-			/*
-			 * for(int i=0; i<listadetalle.size() ;i++) { System.out.
-			 * println("--------------------------------------->>>>Este es el ingresado "
-			 * +listadetalle.get(i).getIdDetalle()); }
-			 */
 			
-			JSFUtil.crearMensajeInfo("Se ha añadido al carrito");
+			catalogo=catalogoSeleccionado; 
+			/*
+			 * listadetalle=listadetalle2;
+			 * 
+			 * if(manager_detalle.actualizarDetalleCAntidad(listadetalle,
+			 * listadetalle2,detalle.getCantidadDetalle(), catalogo)==true) {
+			 */
+			if(detalle.getCantidadDetalle()==null) 
+			{
+				JSFUtil.crearMensajeError("Ingrese una cantidad");
+			}else{
+            	Iva=manager_iva.findIvaById(1);
+    			detalle.setSubtotal(new BigDecimal(this.subtotalDetalle(detalle.getCantidadDetalle().intValue(), catalogo.getPrecio().doubleValue())));
+    			detalle.setPrecioProducto(catalogo.getPrecio());
+    			detalle.setPrecioDescuento(catalogo.getDescuento());
+    			detalle.setValorIva(new BigDecimal(detalle.getSubtotal().doubleValue()*Iva.getCantidad().doubleValue()));
+    			detalle.setTotalDetalle(new BigDecimal(detalle.getSubtotal().doubleValue()-catalogo.getDescuento().doubleValue()+detalle.getValorIva().doubleValue()));
+    			manager_detalle.insertarDetalle(detalle,Iva, catalogo);
+    			detalle=manager_detalle.findDetaleByUltimoDetalle();
+    			listadetalle.add(detalle);
+    			this.valorcompra();
+    			cantidad_carrito=listadetalle.size();
+    			
+            }
+			
+			//JSFUtil.crearMensajeInfo("Se ha añadido al carrito");
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
 			e.printStackTrace();
