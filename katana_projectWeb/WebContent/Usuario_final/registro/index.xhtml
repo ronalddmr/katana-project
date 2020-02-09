@@ -93,7 +93,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<p:inputText class="input100" type="text" name="pass" placeholder="Password..."
+						<p:inputText class="input100" type="password" name="pass" placeholder="Password..."
 							value="#{beanUsuario.usuario.password}"></p:inputText>
 
 						<span class="focus-input100"></span>
@@ -115,7 +115,7 @@
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<p:commandButton value="Insertar" icon="fa fa-save" update="@form"
+							<p:commandButton value="Registrar" icon="fa fa-save" update="@form"
 								action="#{beanUsuario.actionListenerInsertarUsuario()}"></p:commandButton>
 						</div>
 						<br /> <a href="../../login/iniciar_sesion.xhtml"

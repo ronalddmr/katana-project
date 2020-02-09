@@ -71,7 +71,7 @@
 	<div class="container-menu-header">
 		<div class="wrap_header">
 			<!-- Logo -->
-			<a href="../landingPage.xhtml" class="logo"> <img
+			<a href="../landingPageIniciadoSesion.xhtml" class="logo"> <img
 				style="width: 200px; height: 600px !important;"
 				src="../images/katanaimg/katanalogo.png" alt="IMG-LOGO" />
 			</a>
@@ -101,58 +101,67 @@
 			</div>
 
 			<!-- Header Icon -->
-			
 			<div class="header-icons">
-                 
-				<div class="header-wrapicon2">
-					<h:form id="formList">
-						<img src="../images/icons/icon-header-02.png"
-							class="header-icon1 js-show-header-dropdown" alt="ICON" />
-						<span class="header-icons-noti">#{beanDetalle_Producto.cantidad_carrito}</span>
 
-						<!-- Header cart noti -->
-						<div class="header-cart header-dropdown">
-							<ul class="header-cart-wrapitem">
-								<li class="header-cart-item"><p:dataList
-										value="#{beanDetalle_Producto.listadetalle}" var="detalle"
-										type="definition">
-										<f:facet name="header">
+				<div class="header-wrapicon2">
+					<img src="../images/icons/icon-header-02.png"
+						class="header-icon1 js-show-header-dropdown" alt="ICON" /> <span
+						class="header-icons-noti">#{beanDetalle_Producto.cantidad_carrito}</span>
+
+					<!-- Header cart noti -->
+					<div class="header-cart header-dropdown">
+						<ul class="header-cart-wrapitem">
+							<li class="header-cart-item"><p:dataList
+									value="#{beanDetalle_Producto.listadetalle}" var="detalle"
+									type="definition">
+									<f:facet name="header">
                                           Productos en el Carrito
                                  </f:facet>
                               
                                          Producto: #{detalle.proCatalogo.proProducto.nombre} Cantidad: #{detalle.cantidadDetalle}
                                          
                                      <f:facet name="description">
-											<p:graphicImage style="width:60px; heigth:60px"
-												url="#{detalle.proCatalogo.proProducto.imagen1}" />
-											<p:commandButton value="Quitar del carrito" title="Eliminar"
-												update="@form"
-												actionListener="#{beanDetalle_Producto.actionListenerEliminarDetalle(detalle.idDetalle)}">
-											</p:commandButton>
-										</f:facet>
-									</p:dataList></li>
+										<p:graphicImage style="width:60px; heigth:60px"
+											url="#{detalle.proCatalogo.proProducto.imagen1}" />
+										<p:commandButton value="Quitar del carrito" title="Eliminar"
+											update="@form"
+											actionListener="#{beanDetalle_Producto.actionListenerEliminarDetalle(detalle.idDetalle)}">
+										</p:commandButton>
+									</f:facet>
+								</p:dataList></li>
 
-							</ul>
 
-							<div class="header-cart-total">Total:
-								$#{beanDetalle_Producto.valor_compra}</div>
 
-							<div class="header-cart-buttons">
-								<div class="header-cart-wrapbtn">
-									<!-- Button -->
-									<a href="./carrito.xhtml"
-										class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-										Ver carrito </a>
-								</div>
 
+						</ul>
+
+						<div class="header-cart-total">Total:
+							$#{beanDetalle_Producto.valor_compra}</div>
+
+						<div class="header-cart-buttons">
+							<div class="header-cart-wrapbtn">
+								<!-- Button -->
+								<a href="./carritoIniciadoSesion.xhtml"
+									class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									Ver carrito </a>
 							</div>
+
 						</div>
-					</h:form>
+					</div>
 				</div>
 				<span class="linedivide1"></span>
-				<ul>
-					<li><a href="../login/iniciar_sesion.xhtml">Iniciar Sesion </a></li>
-					<li><a href="registro/index.xhtml">Registro</a></li>
+				<ul class="main_menu">
+
+					<li><a><h:outputText value="#{beanLogin.nombre}" /></a>
+						<ul class="sub_menu">
+							<li><a href="./user_profile.xhtml">Perfil</a></li>
+
+							<h:form>
+								<li><a><h:commandButton value="Salir"
+											action="#{beanLogin.salirSistema()}" /></a></li>
+							</h:form>
+						</ul></li>
+
 				</ul>
 				<!-- <a href="#" class="header-wrapicon1 dis-block">
 						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON" />
@@ -333,7 +342,7 @@
 								<p:commandLink update=":form"
 									title="Ver producto">
 									<p:commandButton value="Ver Producto" update=":form"
-							         action="#{beanCatalogo.actionListenerProductoDetalle(cat)}"></p:commandButton>
+							         action="#{beanCatalogo.actionListenerProductoDetalle_IniciadoSesion(cat)}"></p:commandButton>
 								</p:commandLink>
 								
 							</h:panelGrid>
