@@ -2,12 +2,13 @@ package katana.model.manager;
 
 import java.net.InetAddress;
 import java.util.Date;
-import java.net.*;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+
 import katana.model.entities.Bitacora;
+
 
 
 
@@ -18,7 +19,6 @@ public class ManagerAuditoria {
 	private ManagerDAO managerDAO;
 	@EJB
 	private ManagerSeguridad managerSeguridad;
-	
 
 	public ManagerAuditoria() {
 		

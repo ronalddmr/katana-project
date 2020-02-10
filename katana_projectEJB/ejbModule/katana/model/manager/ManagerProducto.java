@@ -50,30 +50,7 @@ public class ManagerProducto {
     public ProProducto findProductoById(int id) {
     	return em.find(ProProducto.class, id);
     }
-    
-	public void crearEventoPro(int codigoUsuario,Class clase,String metodo,String descripcion) throws Exception{
-		Bitacora evento=new Bitacora();
-		//cambio para probar git
-		
-		//Obtener la DIreccion IP
-	       InetAddress direccion = InetAddress.getLocalHost();
-           String IP_local = direccion.getHostAddress();//ip como String
-		
-		//if(codigoUsuario==null )
-			//throw new Exception("Error auditoria: debe indicar el codigo del usuario.");
-		if(metodo==null||metodo.length()==0)
-			throw new Exception("Error auditoria: debe indicar el metodo que genera el evento.");
-		System.out.print(codigoUsuario);
-		evento.setCodigoUsuario(codigoUsuario);
-		evento.setMetodo(clase.getSimpleName()+"/"+metodo);
-		evento.setDescripcion(descripcion);
-		evento.setFechaEvento(new Date());
-		evento.setDireccionIp(IP_local);
-		// se puede consultar desde JSF como extraer la ip desde donde accede el cliente
-		// que se conecta
-		managerDAO.insertar(evento);
-	}
-    
+     
     public void insertarProducto(ProProducto producto) throws Exception {
         ProProducto p=new ProProducto();
         p.setNombre(producto.getNombre()); //si es personalizada el nomnres es "personalizada"
@@ -118,6 +95,7 @@ public class ManagerProducto {
     		em.remove(producto);
     }
     public void actualizarProducto(ProProducto producto) throws Exception {
+ 
     	ProProducto p=findProductoById(producto.getIdProducto());
     	if(p==null)
     		throw new Exception("No existe ese producto");

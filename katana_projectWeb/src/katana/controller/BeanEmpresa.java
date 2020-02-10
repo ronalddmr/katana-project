@@ -5,7 +5,9 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import katana.controller.JSFUtil;
 import katana.model.entities.AudEmpresa;
+import katana.model.entities.Bitacora;
 import katana.model.entities.PedDivpolitica;
+import katana.model.manager.ManagerAuditoria;
 import katana.model.manager.ManagerDPA;
 import katana.model.manager.ManagerEmpresa;
 import java.io.Serializable;
@@ -24,6 +26,8 @@ public class BeanEmpresa implements Serializable{
 	private List<PedDivpolitica> listaCantones;
 	private List<PedDivpolitica> listaCantonesProvincia;
 	
+	private ManagerAuditoria managerAuditoria;
+	private List<Bitacora> listaBitacora;
 	
 	private AudEmpresa empresa;
 	private AudEmpresa empresaSeleccionada;
@@ -43,7 +47,8 @@ public class BeanEmpresa implements Serializable{
 		listaProvincias = managerDPA.findAllProvincias();
 		listaCantones = managerDPA.findAllCantones();
 		listaEmpresa = managerEmpresa.findAllEmpresa();
-		
+		//////// bitacora 
+		listaBitacora = managerEmpresa.findAllBitacora();
 	
 	}
 	
@@ -51,6 +56,18 @@ public class BeanEmpresa implements Serializable{
 	
 /*Bean para Empresa*/
 	
+	public List<Bitacora> getListaBitacora() {
+		return listaBitacora;
+	}
+
+
+
+	public void setListaBitacora(List<Bitacora> listaBitacora) {
+		this.listaBitacora = listaBitacora;
+	}
+
+
+
 	public void actionListenerCantones()
 	{
 		listaCantonesProvincia = managerDPA.findCantonesProvincia(listaCantones, idProvincia);
@@ -87,6 +104,10 @@ public class BeanEmpresa implements Serializable{
 			JSFUtil.crearMensajeError(e.getMessage());
 			e.printStackTrace();
 		}
+	}
+	
+	public void actionListenerCrearEvento() {
+		
 	}
 
 

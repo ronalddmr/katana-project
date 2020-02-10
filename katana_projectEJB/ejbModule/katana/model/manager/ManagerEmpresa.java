@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import katana.model.entities.AudEmpresa;
+import katana.model.entities.Bitacora;
 import katana.model.entities.PedDivpolitica;
 import katana.model.entities.ProColor;
 import katana.model.entities.ProTalla;
@@ -30,6 +31,12 @@ public class ManagerEmpresa {
      */
     public ManagerEmpresa() {
         // TODO Auto-generated constructor stub
+    }
+    
+    public List<Bitacora> findAllBitacora(){
+    	String consulta="SELECT b FROM Bitacora b";
+    	Query q=em.createQuery(consulta, Bitacora.class);
+    	return q.getResultList();
     }
     
     

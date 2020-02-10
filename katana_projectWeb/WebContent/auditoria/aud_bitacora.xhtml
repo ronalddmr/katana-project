@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no"></meta>
+		<title>Bitacora</title>
+	</f:facet>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form>
+		<p:menubar>
+		<p:menuitem>ADMINISTRADOR EMPRESA</p:menuitem>
+		<p:submenu style="margin-left:75%;" label="#{beanLogin.nombre}" icon="fa fa-user">
+            	<p:menuitem value="Salir" action="#{beanLogin.salirSistema()}"/>
+        	</p:submenu>
+		</p:menubar>
+	</h:form>
+	
+	<br />
+	<h:form id="form2">
+		<p:panel header="Datos de la Auditoria">
+			<p:dataTable value="#{beanEmpresa.listaBitacora}" reflow="true"
+				var="bit" paginator="true" rows="10">
+				<p:column headerText="ID" priority="1">
+					<h:outputText value="#{bit.codigoEvento}" />
+				</p:column>
+				<p:column headerText="Codigo Usuario" priority="1">
+					<h:outputText value="#{bit.codigoUsuario}" />
+				</p:column>
+				<p:column headerText="Metodo" priority="1">
+					<h:outputText value="#{bit.metodo}" />
+				</p:column>
+				<p:column headerText="Descripcion" priority="1">
+					<h:outputText value="#{bit.descripcion}" />
+				</p:column>
+				<p:column headerText="Fecha" priority="1">
+					<h:outputText value="#{bit.fechaEvento}" />
+				</p:column>
+				<p:column headerText="Direccion IP" priority="1">
+					<h:outputText value="#{bit.direccionIp}" />
+				</p:column>
+				
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+	<br />
+	<h:form>
+	<p:commandButton value="Inicio" action="/Usuario_administrador/index_admin"
+					icon="fa fa-home">
+				</p:commandButton >
+	</h:form>
+
+	
+</body>
+</html>
+	
