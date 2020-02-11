@@ -262,12 +262,6 @@
 								<f:selectItems value="#{beanPedido.listaCantones}"
 									var="p" itemLabel="#{p.nombre}" itemValue="#{p.idDivpolitica}" />
 							</h:selectOneMenu>
-							<p:outputLabel value="Estado:" />
-							<h:selectOneMenu value="#{beanPedido.estado.idEstado}"
-								id="Estado">
-								<f:selectItems value="#{beanPedido.listaestado}" var="p"
-									itemLabel="#{p.nombre}" itemValue="#{p.idEstado}" />
-							</h:selectOneMenu>
 							<p:outputLabel value="Forma de pago:" />
 						<h:inputText value="#{beanPedido.pedido.formaPago}"></h:inputText>
 						<p:outputLabel value="Dirección:" />
