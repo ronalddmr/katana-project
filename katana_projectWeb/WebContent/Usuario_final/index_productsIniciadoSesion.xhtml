@@ -101,8 +101,9 @@
 			</div>
 
 			<!-- Header Icon -->
+			
 			<div class="header-icons">
-
+                  <h:form id="formList">
 				<div class="header-wrapicon2">
 					<img src="../images/icons/icon-header-02.png"
 						class="header-icon1 js-show-header-dropdown" alt="ICON" /> <span
@@ -111,7 +112,8 @@
 					<!-- Header cart noti -->
 					<div class="header-cart header-dropdown">
 						<ul class="header-cart-wrapitem">
-							<li class="header-cart-item"><p:dataList
+							<li class="header-cart-item">
+							<p:dataList
 									value="#{beanDetalle_Producto.listadetalle}" var="detalle"
 									type="definition">
 									<f:facet name="header">
@@ -124,13 +126,13 @@
 										<p:graphicImage style="width:60px; heigth:60px"
 											url="#{detalle.proCatalogo.proProducto.imagen1}" />
 										<p:commandButton value="Quitar del carrito" title="Eliminar"
-											update="@form"
+											update="formList"
 											actionListener="#{beanDetalle_Producto.actionListenerEliminarDetalle(detalle.idDetalle)}">
 										</p:commandButton>
 									</f:facet>
 								</p:dataList></li>
 
-
+                        
 
 
 						</ul>
@@ -149,6 +151,7 @@
 						</div>
 					</div>
 				</div>
+				</h:form>
 				<span class="linedivide1"></span>
 				<ul class="main_menu">
 

@@ -44,6 +44,8 @@ public class BeanPedido implements Serializable{
 	
 	@Inject private BeanDetalle_Producto beandetalle_producto;
 	
+	@Inject private BeanLogin beanlogin;
+	
 	private PedPedido pedido;
 	private PedPedido pedidoSeleccionado;
 	private PedEstado estado;
@@ -112,8 +114,8 @@ public class BeanPedido implements Serializable{
 			pedido.setCostoEnvio(new BigDecimal(0));
 			pedido.setBaseImponible(new BigDecimal(ivatotal));
 			pedido.setBaseCero(new BigDecimal(0));
-			usuario=managerusuario.findUsuarioById(1);
-			pedido.setUsuUsuario(usuario);
+			 usuario=managerusuario.findUsuarioByMail(beanlogin.getCorreoUsuario());
+			estado=managerestado.findEstadoById(2);
 			managerPedido.insertarPedido(pedido, listadetalle, locacion, estado, usuario);
 			listaPedido = managerPedido.findAllPedido();
 			pedido=managerPedido.findPedidoByUltimoPedido();
@@ -122,7 +124,7 @@ public class BeanPedido implements Serializable{
 				managerdetalle.poneridPedido_detalle(listadetalle.get(i), pedido);
 			}
 			pedido=new PedPedido();
-			beandetalle_producto.setListadetalle(null);
+			beandetalle_producto.getListadetalle().clear();
 			beandetalle_producto.setCantidad_carrito(0);
 			beandetalle_producto.setValor_compra(0);
 			JSFUtil.crearMensajeInfo("El pedido se ha realizado con éxito");
