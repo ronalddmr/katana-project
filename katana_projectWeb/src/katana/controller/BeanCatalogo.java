@@ -22,12 +22,14 @@ public class BeanCatalogo implements Serializable{
 	private List<ProCatalogo> listaCatalogo;
 	private ProCatalogo catalogo;
 	private ProCatalogo catalogoSeleccionado;
+	private List<ProCatalogo> listaMostrar;
 
 	@PostConstruct
 	public void inicializar() 
 	{
 		
 	    listaCatalogo=managerCatalogo.findAllCatalogo();
+	    listaMostrar=this.actionListenerListaProductosMostrar();
 	    catalogo=new ProCatalogo();
 	}
 	
@@ -40,11 +42,13 @@ public class BeanCatalogo implements Serializable{
 	
 	public void actionListenerActualizarCatalogo() {
 		try {
-			managerCatalogo.actualizarCatalogo(catalogoSeleccionado);;
+			managerCatalogo.actualizarCatalogo(catalogoSeleccionado);
 			listaCatalogo=managerCatalogo.findAllCatalogo();
+			listaMostrar=this.actionListenerListaProductosMostrar();
 			JSFUtil.crearMensajeInfo("Datos actualizados");
 		} catch (Exception e) {
 			listaCatalogo=managerCatalogo.findAllCatalogo();
+			listaMostrar=this.actionListenerListaProductosMostrar();
 			JSFUtil.crearMensajeError(e.getMessage());
 			e.printStackTrace();
 		}
@@ -60,6 +64,15 @@ public class BeanCatalogo implements Serializable{
 		return "/Usuario_final/product_detail_IniciadoSesion";
 	}
 
+	public List<ProCatalogo> actionListenerListaProductosMostrar() {
+		List<ProCatalogo> lista = new ArrayList<ProCatalogo>();
+		for (ProCatalogo c : listaCatalogo) {
+			if (c.getMostrar()==true) {
+				lista.add(c);
+			}
+		}
+		return lista;
+	}
 
 
 	public List<ProCatalogo> getListaCatalogo() {
@@ -96,6 +109,19 @@ public class BeanCatalogo implements Serializable{
 		this.catalogoSeleccionado = catalogoSeleccionado;
 	}
 
+
+
+	public List<ProCatalogo> getListaMostrar() {
+		return listaMostrar;
+	}
+
+
+
+	public void setListaMostrar(List<ProCatalogo> listaMostrar) {
+		this.listaMostrar = listaMostrar;
+	}
+
+	
 
 
 
