@@ -72,6 +72,41 @@ public class ManagerSeguridad {
 		return loginDTO;
 	}
 	
+	public LoginDTO accederSistemaCarrito(String correoUsuario,String clave) throws Exception{
+
+		UsuUsuario usuario=(UsuUsuario)managerUsuario.findUsuarioByMail(correoUsuario);//busco al usuario por su correo electronico
+		System.out.println("USUARIO: " + usuario.getNombre());
+		UsuUsuarioRol usuRol = usuario.getUsuUsuarioRols().get(0); //aqui le mando el objeto relacinado a la tabla usuarios
+		//le mando en la posicion cero de todas las relaciones que tiene 
+		//porque no va a tener mas roles, no se de que otra manera hacerlo pepos :c ya intente full cosas
+		UsuRol rol = usuRol.getUsuRol(); //Y ahora de la tabla intermedia cojo y le mando el rol
+		System.out.println("ROL: " + rol.getNombre());
+		
+		if(usuario==null)
+			throw new Exception("Error en usuario y/o clave.");
+		
+		if(!usuario.getPassword().equals(clave))
+			throw new Exception("Error en usuario y/o clave.");
+		
+		LoginDTO loginDTO=new LoginDTO();
+
+		loginDTO.setUsuario(usuario.getNombre());
+		loginDTO.setApellido(usuario.getApellido());
+		loginDTO.setCorreo(usuario.getCorreo());
+		loginDTO.setImagen(usuario.getImagenPerfil());
+		loginDTO.setPassword(usuario.getPassword());
+		loginDTO.setCodigoUsuario(usuario.getIdUsuario());
+		loginDTO.setPedidos(usuario.getPedPedidos());
+		loginDTO.setProductos(usuario.getProProductos());
+
+		//dependiendo del tipo de usuario, configuramos la ruta de acceso a las pags web:
+		if(rol.getNombre().equals("Cliente"))
+			loginDTO.setRutaAcceso("/Usuario_final/carritoIniciadoSesion.xhtml");
+		else if(rol.getNombre().equals("Administrador") || rol.getNombre().equals("Dueño"))
+			loginDTO.setRutaAcceso("/Usuario_administrador/index_admin.xhtml"); //tiene que redirigir al menu que Ervin esta haciendo de admin
+		return loginDTO;
+	}
+	
 	public UsuUsuario findUsuarioByMail(String correoUsuario) throws Exception {
 		UsuUsuario usuario=(UsuUsuario)managerDAO.findById(UsuUsuario.class, correoUsuario);
 		return usuario;

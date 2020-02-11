@@ -63,6 +63,28 @@ public class BeanLogin implements Serializable {
 		return "";
 	}
 	
+	public String accederSistemaCarrito(){
+		acceso=false;
+		try {
+			loginDTO=managerSeguridad.accederSistemaCarrito(correoUsuario, clave);
+			nombre = managerSeguridad.getNombreUsuario(correoUsuario);
+			//verificamos el acceso del usuario:
+			tipoUsuario=loginDTO.getTipoUsuario();
+			//redireccion dependiendo del tipo de usuario:
+			managerAuditoria.crearEvento(loginDTO.getCodigoUsuario(),this.getClass(), "Acceder Sistema", "Acceso a login");
+
+			/*
+			 * managerAuditoria.crearEvento(codigoUsuario, this.getClass(),
+			 * "accederSistema", "Acceso a login");
+			 */
+			return loginDTO.getRutaAcceso()+"?faces-redirect=true";
+		} catch (Exception e) {
+			e.printStackTrace();
+			JSFUtil.crearMensajeError(e.getMessage());
+		}
+		return "";
+	}
+	
 	/**
 	 * Finaliza la sesion web del usuario.
 	 * @return
