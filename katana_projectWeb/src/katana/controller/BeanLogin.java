@@ -5,6 +5,8 @@ import javax.ejb.EJB;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 
 import katana.model.dto.LoginDTO;
 import katana.model.manager.ManagerAuditoria;
@@ -13,9 +15,16 @@ import katana.model.manager.ManagerAuditoria;
 //QUE CORRESPONEN A LA AUDITORIA
 import katana.model.manager.ManagerSeguridad;
 import katana.model.util.ModelUtil;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.HashMap;
+import java.util.Map;
 
 @Named
 @javax.enterprise.context.SessionScoped
@@ -120,6 +129,35 @@ public class BeanLogin implements Serializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public String actionReporte() {
+		Map<String, Object> parametros = new HashMap<String, Object>();
+		/*
+		 * parametros.put("p_titulo_principal",p_titulo_principal);
+		 * parametros.put("p_titulo",p_titulo);
+		 */
+		FacesContext context = FacesContext.getCurrentInstance();
+		ServletContext servletContext = (ServletContext) context.getExternalContext().getContext();
+		String ruta = servletContext.getRealPath("auditoria/auditorias.jasper");
+		System.out.println(ruta);
+		HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
+		response.addHeader("Content-disposition", "attachment;filename=auditoria.pdf");
+		response.setContentType("application/pdf");
+		try {
+			Class.forName("org.postgresql.Driver");
+			Connection connection = null;												// clave de la base de datos
+			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/katana", "postgres", "sasql");
+			JasperPrint impresion = JasperFillManager.fillReport(ruta, parametros, connection);
+			JasperExportManager.exportReportToPdfStream(impresion, response.getOutputStream());
+			context.getApplication().getStateManager().saveView(context);
+			System.out.println("reporte generado.");
+			context.responseComplete();
+		} catch (Exception e) {
+			JSFUtil.crearMensajeError(e.getMessage());
+			e.printStackTrace();
+		}
+		return "";
 	}
 
 	

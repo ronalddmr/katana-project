@@ -57,8 +57,10 @@
 	<p:commandButton value="Inicio" action="/Usuario_administrador/index_admin"
 					icon="fa fa-home">
 				</p:commandButton >
-	</h:form>
-
+					<p:commandButton value="Reporte" ajax="false"   icon="fa fa-print"
+				actionListener="#{beanLogin.actionReporte()}"></p:commandButton>
+		</h:form>
+		
 	
 </body>
 </html>
