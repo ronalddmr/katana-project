@@ -1,5 +1,6 @@
 package katana.model.manager;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +40,20 @@ public class ManagerPedido_Producto {
     	String consulta="SELECT p FROM PedPedido p";
     	Query q=em.createQuery(consulta, PedPedido.class);
     	return q.getResultList();
+    }
+    
+    public List<PedPedido> findAllPedidoByUser(int id){
+    	List<PedPedido> lista_pedido=this.findAllPedido();
+    	List<PedPedido> lista_pedido_usuario=new ArrayList<>();
+    		for (PedPedido p: lista_pedido) 
+        	{
+        		if(p.getUsuUsuario().getIdUsuario()==id &&p.getPedEstado().getIdEstado()==2) 
+        		{
+        			lista_pedido_usuario.add(p);
+        		}
+        	} 
+    		
+    	return lista_pedido_usuario;
     }
     
     public PedPedido findPedidoByUltimoPedido() {

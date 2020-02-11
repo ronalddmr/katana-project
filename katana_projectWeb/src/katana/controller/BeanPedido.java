@@ -35,6 +35,7 @@ public class BeanPedido implements Serializable{
 	@EJB
 	private ManagerEstado managerestado;
 	
+	private List<PedPedido> listaPedidoByUser;
 	private List<PedPedido> listaPedido;
 	private List<PedDivpolitica> listaProvincias;
 	private List<PedDivpolitica> listaCantones;
@@ -66,11 +67,13 @@ public class BeanPedido implements Serializable{
 		locacion = new PedDivpolitica();
 		pedidoSeleccionado=new PedPedido();
 		pedidoSeleccionado.setPedDivpolitica(locacion);
-		
+		listaPedidoByUser=managerPedido.findAllPedidoByUser
+				(managerusuario.findUsuarioByMail(beanlogin.getCorreoUsuario()).getIdUsuario());
 		listaProvincias = managerDPA.findAllProvincias();
 		listaCantones = managerDPA.findAllCantones();
 		listaPedido = managerPedido.findAllPedido();
 		listaestado=managerestado.findAllEstado();
+		
 
 	}
 	
@@ -84,7 +87,11 @@ public class BeanPedido implements Serializable{
 		
 	}
 	
-	
+	public void actionlistenerPedidosByUser() 
+	{
+		listaPedidoByUser=managerPedido.findAllPedidoByUser
+				(managerusuario.findUsuarioByMail(beanlogin.getCorreoUsuario()).getIdUsuario());
+	}
 	
 	public void actionListenerInsertarPedido() {
 		try {
@@ -127,6 +134,8 @@ public class BeanPedido implements Serializable{
 			beandetalle_producto.getListadetalle().clear();
 			beandetalle_producto.setCantidad_carrito(0);
 			beandetalle_producto.setValor_compra(0);
+			listaPedidoByUser=managerPedido.findAllPedidoByUser
+					(managerusuario.findUsuarioByMail(beanlogin.getCorreoUsuario()).getIdUsuario());
 			JSFUtil.crearMensajeInfo("El pedido se ha realizado con éxito");
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
@@ -293,6 +302,18 @@ public class BeanPedido implements Serializable{
 
 	public void setListaestado(List<PedEstado> listaestado) {
 		this.listaestado = listaestado;
+	}
+
+
+
+	public List<PedPedido> getListaPedidoByUser() {
+		return listaPedidoByUser;
+	}
+
+
+
+	public void setListaPedidoByUser(List<PedPedido> listaPedidoByUser) {
+		this.listaPedidoByUser = listaPedidoByUser;
 	}
 	
 	/*
