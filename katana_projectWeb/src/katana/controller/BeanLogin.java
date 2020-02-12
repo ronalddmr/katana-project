@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -41,6 +42,8 @@ public class BeanLogin implements Serializable {
 	private ManagerAuditoria managerAuditoria;
 
 	private LoginDTO loginDTO;
+	
+	@Inject private BeanPedido beanpedido;
 
 	@PostConstruct
 	public void inicializar() {
@@ -64,6 +67,7 @@ public class BeanLogin implements Serializable {
 			 * managerAuditoria.crearEvento(codigoUsuario, this.getClass(),
 			 * "accederSistema", "Acceso a login");
 			 */
+			beanpedido.actionlistenerPedidosByUser();
 			return loginDTO.getRutaAcceso()+"?faces-redirect=true";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -86,6 +90,7 @@ public class BeanLogin implements Serializable {
 			 * managerAuditoria.crearEvento(codigoUsuario, this.getClass(),
 			 * "accederSistema", "Acceso a login");
 			 */
+			beanpedido.actionlistenerPedidosByUser();
 			return loginDTO.getRutaAcceso()+"?faces-redirect=true";
 		} catch (Exception e) {
 			e.printStackTrace();

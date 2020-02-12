@@ -265,7 +265,12 @@
 							</h:selectOneMenu>
 							
 							<p:outputLabel value="Forma de pago:" />
-						<h:inputText value="#{beanPedido.pedido.formaPago}"></h:inputText>
+						
+						<h:selectOneMenu value="#{beanPedido.pedido.formaPago}" >
+								<f:selectItem itemValue = "Efectivo" itemLabel = "Efectivo" /> 
+                                <f:selectItem itemValue = "Depósito" itemLabel = "Depósito" /> 
+
+							</h:selectOneMenu>
 						<p:outputLabel value="Dirección:" />
 							<h:inputText value="#{beanPedido.pedido.direccion}"></h:inputText>
 							<p:outputLabel value="Referencia:" />

@@ -41,7 +41,9 @@
 				<h:outputText value="Apellidos" />
 				<p:inputText value="#{beanUsuario.usuario.apellido}"></p:inputText> 
 				<h:outputText value="Correo" />
-				<p:inputText value="#{beanUsuario.usuario.correo}"></p:inputText> 
+				<p:inputText value="#{beanUsuario.usuario.correo}"></p:inputText>
+				<h:outputText value="Imagen" />
+				<p:inputText value="#{beanUsuario.usuario.imagenPerfil}"></p:inputText> 
 				<h:outputText value="Password" />
 				<p:inputText value="#{beanUsuario.usuario.password}"></p:inputText> 
 				<p:commandButton value="Insertar" icon="fa fa-save"
@@ -72,6 +74,11 @@
 				<p:column headerText="Correo" filterBy="#{usuario.correo}"
 					filterMatchMode="contains" priority="1">
 					<h:outputText value="#{usuario.correo}" />
+				</p:column>
+				<p:column headerText="Imagen" filterMatchMode="contains"
+					priority="1">
+					<h:graphicImage style="width:150px; heigth:150px"
+						url="#{usuario.imagenPerfil}" />
 				</p:column>
 				<p:column headerText="OPCIONES" priority="1">
 				<p:commandButton icon="fa fa-close" title="Eliminar" update="@form"
@@ -110,6 +117,10 @@
 			    <h:outputText value="Correo" />
 				<p:inputText
 					value="#{beanUsuario.usuarioSeleccionado.correo}"></p:inputText>
+				<h:outputText value="Imagen 1" />
+				<p:inputTextarea
+					value="#{beanUsuario.usuarioSeleccionado.imagenPerfil}"></p:inputTextarea>
+				
 			</p:panelGrid> 
 			<p:commandButton value="Actualizar" icon="fa fa-save"
 				update="@form, :form2"

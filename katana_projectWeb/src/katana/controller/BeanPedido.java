@@ -67,13 +67,12 @@ public class BeanPedido implements Serializable{
 		locacion = new PedDivpolitica();
 		pedidoSeleccionado=new PedPedido();
 		pedidoSeleccionado.setPedDivpolitica(locacion);
-		listaPedidoByUser=managerPedido.findAllPedidoByUser
-				(managerusuario.findUsuarioByMail(beanlogin.getCorreoUsuario()).getIdUsuario());
+		
 		listaProvincias = managerDPA.findAllProvincias();
 		listaCantones = managerDPA.findAllCantones();
 		listaPedido = managerPedido.findAllPedido();
 		listaestado=managerestado.findAllEstado();
-		
+			
 
 	}
 	
@@ -114,11 +113,13 @@ public class BeanPedido implements Serializable{
 			if(idCanton.equals("1001")) 
 			{
 				pedido.setTotal(new BigDecimal(total+5));
+				pedido.setCostoEnvio(new BigDecimal(5));
 			}else 
 			{
 				pedido.setTotal(new BigDecimal(total));
+				pedido.setCostoEnvio(new BigDecimal(0));
 			}
-			pedido.setCostoEnvio(new BigDecimal(0));
+			
 			pedido.setBaseImponible(new BigDecimal(ivatotal));
 			pedido.setBaseCero(new BigDecimal(0));
 			 usuario=managerusuario.findUsuarioByMail(beanlogin.getCorreoUsuario());

@@ -161,7 +161,7 @@
 
 					<li><a><h:outputText value="#{beanLogin.nombre}" /></a>
 						<ul class="sub_menu">
-							
+							<li><a href="./user_profile.xhtml">Perfil</a></li>
 							<h:form>
 								<li><a><h:commandButton value="Salir"
 											action="#{beanLogin.salirSistema()}" /></a></li>
@@ -181,161 +181,58 @@
 
 	</header>
 	<!--===============================================================================================-->
-
 <div style="margin-top: 200px;">
 <h2></h2>
-   <div class="col-lg-4 order-lg-1 text-center" style="margin-left: 35%">
+</div> 
+<div class="container">
+        <div class="row my-2" style="margin-left: 45%">
+        
+        <div class="col-lg-4 order-lg-1 text-center">
             <h:graphicImage style="width:150px; heigth:150px"
 									url="#{beanLogin.loginDTO.imagen}" />
 									<br/>
             <label class="custom-file">
                 <input type="file" id="file" class="custom-file-input" />
-                <span class="custom-file-control">Actualizar imagen</span>
+                <span class="custom-file-control">Actualizar Imagen</span>
             </label>
         </div> 
-</div> 
-<div class="container">
-    <div class="row my-2">
-        <div class="col-lg-8 order-lg-2">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Perfil</a>
-                </li>
-                <li class="nav-item">
-                    <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Pedidos</a>
-                </li>
-                
-            </ul>
-            <div class="tab-content py-4">
-                <div class="tab-pane active" id="profile">
-                    <h5 class="mb-3">Perfil Usuario</h5>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h6>Nombre</h6>
-                            <p>
-                                <h:outputText value="#{beanLogin.loginDTO.usuario}" />
-                            </p><br />
-                            <h6>Apellido</h6>
-                            <p><h:outputText value="#{beanLogin.loginDTO.apellido}" /></p><br />
-                            <h6>Correo</h6>
-                            <p><h:outputText value="#{beanLogin.loginDTO.correo}" /></p><br />
-                         
-                             
-                            
-                        </div>
-                      
-                      <!--   <div class="col-md-12">
-                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Recent Activity</h5>
-                            <table class="table table-sm table-hover table-striped">
-                                <tbody>                                    
-                                    <tr>
-                                        <td>
-                                            <strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Kensington</strong> deleted MyBoard3 in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Skell</strong> deleted his post Look at Why this is.. in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div> -->
-            
-          
-                    </div>
-                    <!--/row-->
-                </div>
-             <div class="size15 trans-0-4 m-b-20">
+    </div>
+
+    <div class="wrap-input100 validate-input"> 
+    <h:outputText value="Nombre:" styleClass="p-l-20" />
+						<p:inputText class="input100 " type="text" 
+						 value="#{beanUsuario.usuarioSeleccionado.nombre}"></p:inputText>
+						<span class="focus-input100"></span> <span class="label-input100"></span>
+					</div>
+			
+					<div class="wrap-input100 validate-input"> 
+    <h:outputText value="Apellido:" styleClass="p-l-20" />
+						<p:inputText class="input100 " type="text" 
+						 value="#{beanUsuario.usuarioSeleccionado.apellido}"></p:inputText>
+						<span class="focus-input100"></span> <span class="label-input100"></span>
+					</div>
+					<div class="wrap-input100 validate-input"> 
+    <h:outputText value="Correo:" styleClass="p-l-20" />
+						<p:inputText class="input100 " type="text" 
+						 value="#{beanUsuario.usuarioSeleccionado.correo}"></p:inputText>
+						<span class="focus-input100"></span> <span class="label-input100"></span>
+					</div>
+					<div class="wrap-input100 validate-input"> 
+    <h:outputText value="Contraseña:" styleClass="p-l-20" />
+						<p:inputText class="input100 " type="password" 
+						 value="#{beanUsuario.usuarioSeleccionado.password}"></p:inputText>
+						<span class="focus-input100"></span> <span class="label-input100"></span>
+					</div>
+     
+      <br></br>
+    <div class="size15 trans-0-4 m-b-20">
 					
-			       <a href="../Usuario_final/user_profile_edit.xhtml"
+			       <a href="../Usuario_final/user_profile.xhtml"
 									class="flex-c-m size10 bg1 bo-rad-23 hov1 s-text1 trans-0-4"
-									onclick="#{beanUsuario.actionListenerSeleccionarUsuarioByEMAIL(beanLogin.correoUsuario)}">
+									onclick="#{beanUsuario.actionListenerActualizarUsuario()}">
 									Actualizar </a>
 			       </div>
-     
-                <div class="tab-pane" id="messages">
-                  
-                    
-                              
-								<p:dataView var="pedido" value="#{beanPedido.listaPedidoByUser}" rows="12"
-									paginator="true" rowsPerPageTemplate="6,12,16"
-									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-									gridIcon="pi pi-th-large" listIcon="pi pi-bars">
 
-									<p:dataViewGridItem>
-										<p:panel header="Pedido del: #{pedido.fechaPedido}" style="text-align:center">
-											<h:panelGrid columns="1" >
-                                                 <h:outputText value="Fecha de Entrega:" />
-												<h:outputText value="#{pedido.fechaEntrega}" />
-												<hr></hr>
-												<h:outputText value="Valor a Pagar:" />
-												<h:outputText value="#{pedido.total}" />
-											</h:panelGrid>
-										</p:panel>
-									</p:dataViewGridItem>
-
-									<p:dataViewListItem>
-										<h:panelGrid columns="3" style="width:100%"
-											columnClasses="detail">
-											
-                                              
-											<p:outputPanel>
-											  <h4><h:outputText value="Pedido del: #{pedido.fechaPedido}" /></h4>
-												<h:panelGrid columns="2" cellpadding="5">
-													<h:outputText value="Fecha de Enrega:" />
-													<h:outputText value="#{pedido.fechaEntrega}" style="font-weight: bold" />
-
-													<h:outputText value="Estado del Pedido:" />
-													<h:outputText value="#{pedido.pedEstado.nombre}" style="font-weight: bold" />
-
-													<h:outputText value="Dirección:" />
-													<h:outputText value="#{pedido.direccion}" style="font-weight: bold" />
-													
-													<h:outputText value="Forma de Pago:" />
-													<h:outputText value="#{pedido.formaPago}" style="font-weight: bold" />
-													
-													<h:outputText value="Costo de envío:" />
-													<h:outputText value="#{pedido.costoEnvio}" style="font-weight: bold" />
-													
-													<h:outputText value="Persona que Recibe:" />
-													<h:outputText value="#{pedido.identificacion}" style="font-weight: bold" />
-													
-													<h:outputText value="Total:" />
-													<h:outputText value="#{pedido.total}" style="font-weight: bold" />
-													
-												</h:panelGrid>
-												<hr></hr>
-													<br></br>	
-											</p:outputPanel>
-
-											
-										</h:panelGrid>
-										
-									</p:dataViewListItem>
-								</p:dataView>
-						
-                </div>
-                
-            </div>
-        </div>
-     
-    </div>
 </div>
 
 

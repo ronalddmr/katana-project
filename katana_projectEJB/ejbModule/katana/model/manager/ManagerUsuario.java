@@ -79,6 +79,7 @@ public class ManagerUsuario {
     	aux.setApellido(usuario.getApellido());
     	aux.setCorreo(usuario.getCorreo());
     	aux.setPassword(usuario.getPassword());
+    	aux.setImagenPerfil(usuario.getImagenPerfil());
         em.persist(aux);
     }
     public void eliminarUsuario(int id) {
@@ -92,6 +93,7 @@ public class ManagerUsuario {
     	e.setNombre(usuario.getNombre());
     	e.setCorreo(usuario.getCorreo());
     	e.setPassword(usuario.getPassword());
+    	e.setImagenPerfil(usuario.getImagenPerfil());
     	em.merge(e);
     }
     

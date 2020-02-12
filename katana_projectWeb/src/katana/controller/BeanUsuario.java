@@ -5,6 +5,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import katana.controller.JSFUtil;
@@ -26,6 +27,8 @@ public class BeanUsuario implements Serializable {
 	@EJB
 	private ManagerRol managerRol;
 	
+	
+	
 	/*USUARIO*/
 	private List<UsuUsuario> listaUsuario;
 	private UsuUsuario usuario;
@@ -42,6 +45,8 @@ public class BeanUsuario implements Serializable {
 	private UsuUsuarioRol usuarioRol;
 	private UsuUsuarioRol usuarioRolSeleccionado;
 
+	@Inject private BeanLogin beanlogin;
+	
 	@PostConstruct
 	public void inicializar() {
 		/*USUARIO*/
@@ -91,9 +96,14 @@ public class BeanUsuario implements Serializable {
 	public void actionListenerSeleccionarUsuario(UsuUsuario usuario) {
 		usuarioSeleccionado = usuario;
 	}
+	
+	public void actionListenerSeleccionarUsuarioByEMAIL(String correo) {
+		usuarioSeleccionado = managerUsuario.findUsuarioByMail(correo);
+	}
 
 	public void actionListenerActualizarUsuario() {
 		try {
+			System.out.println(usuarioSeleccionado.getNombre());;
 			managerUsuario.actualizarUsuario(usuarioSeleccionado);
 			listaUsuario = managerUsuario.findAllUsuarios();
 			JSFUtil.crearMensajeInfo("Datos actualizados.");
@@ -266,6 +276,14 @@ public class BeanUsuario implements Serializable {
 
 	public void setUsuarioRolSeleccionado(UsuUsuarioRol usuarioRolSeleccionado) {
 		this.usuarioRolSeleccionado = usuarioRolSeleccionado;
+	}
+
+	public BeanLogin getBeanlogin() {
+		return beanlogin;
+	}
+
+	public void setBeanlogin(BeanLogin beanlogin) {
+		this.beanlogin = beanlogin;
 	}
 
 	/*
