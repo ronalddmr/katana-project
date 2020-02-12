@@ -56,12 +56,12 @@ public class BeanCatalogo implements Serializable{
 	
 	public String actionListenerProductoDetalle(ProCatalogo cat){
 		this.catalogoSeleccionado = cat;
-		return "/Usuario_final/product_detail";
+		return "/Usuario_final/product_detail?faces-redirect=true";
 	}
 	
 	public String actionListenerProductoDetalle_IniciadoSesion(ProCatalogo cat){
 		this.catalogoSeleccionado = cat;
-		return "/Usuario_final/product_detail_IniciadoSesion";
+		return "/Usuario_final/product_detail_IniciadoSesion?faces-redirect=true";
 	}
 
 	public List<ProCatalogo> actionListenerListaProductosMostrar() {

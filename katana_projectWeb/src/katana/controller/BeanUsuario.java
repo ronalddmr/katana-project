@@ -8,7 +8,10 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.jboss.resteasy.core.registry.SegmentNode;
+
 import katana.controller.JSFUtil;
+import katana.model.entities.ProCatalogo;
 import katana.model.entities.UsuRol;
 import katana.model.entities.UsuUsuario;
 import katana.model.entities.UsuUsuarioRol;
@@ -112,6 +115,26 @@ public class BeanUsuario implements Serializable {
 			JSFUtil.crearMensajeError(e.getMessage());
 			e.printStackTrace();
 		}
+	}
+	
+	public String actionListenerActualizarUsuario_Final() {
+		try {
+			System.out.println(usuarioSeleccionado.getNombre());;
+			managerUsuario.actualizarUsuario(usuarioSeleccionado);
+			listaUsuario = managerUsuario.findAllUsuarios();
+			JSFUtil.crearMensajeInfo("Datos actualizados.");
+            beanlogin.salirSistema();
+            return "/login/iniciar_sesion?faces-redirect=true";
+		} catch (Exception e) {
+			listaUsuario = managerUsuario.findAllUsuarios();
+			JSFUtil.crearMensajeError(e.getMessage());
+			e.printStackTrace();
+			return "/login/iniciar_sesion?faces-redirect=true";
+		}
+	}
+	
+	public String actionListenerLogin(){
+		return "/login/iniciar_sesion";
 	}
 
 	public void actionListenerEliminarUsuario(int id) {
