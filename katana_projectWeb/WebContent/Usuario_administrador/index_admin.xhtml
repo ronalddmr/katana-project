@@ -16,8 +16,7 @@
 <p:growl>
 		<p:autoUpdate />
 	</p:growl>
-	<h:form>
-
+	
 
 		<p:sidebar widgetVar="sidebar3" position="top" baseZIndex="10000">
 			<h1 style="font-weight: normal">Top Sidebar</h1>
@@ -31,6 +30,7 @@
 			</p:submenu>
 		</p:menubar>
 		</h:form>
+		<h:form>
 		
 		<p:megaMenu orientation="vertical" style="margin-top:20px">
 			<p:menuitem value="Empresa" action="/auditoria/aud-empresa"
@@ -62,6 +62,11 @@
 				icon="fa fa-users"></p:menuitem>
 				<p:menuitem value="Auditoria" action="/auditoria/aud_bitacora"
 				icon="fa fa-info-circle"></p:menuitem>
+				<p:menuitem value="Pedidos" action="product_pedidos"
+				icon="fa fa-info-circle"></p:menuitem>
+				<p:menuitem value="Detalle Pedidos" action="product_detail_admin"
+				icon="fa fa-info-circle"></p:menuitem>
+				
 				
 
 

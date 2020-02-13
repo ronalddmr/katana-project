@@ -29,6 +29,13 @@ public class BeanDetalle_Producto implements Serializable{
 	
 	private List<PedDetallePedido> listadetalle_completa;
 	private List<PedDetallePedido> listadetalle=new ArrayList<>();
+	private List<Double> listacantidad=new ArrayList();
+	private List<Double> listasubtotal=new ArrayList();
+	private List<Double> listatotal=new ArrayList();
+	
+	BigDecimal cantidad=new BigDecimal(0);
+	BigDecimal subtotal=new BigDecimal(0);
+	BigDecimal total=new BigDecimal(0);
 	//private List<PedDetallePedido> listadetalle2=new ArrayList<>();
 	private PedDetallePedido detalle;
 	private PedPedido pedido;
@@ -45,6 +52,7 @@ public class BeanDetalle_Producto implements Serializable{
 	    pedido=new PedPedido();
 	    Iva=new PedIva();
 	    catalogo=new ProCatalogo();
+	    listadetalle_completa=manager_detalle.findAllDetallePedido();
 	}
 	
 	
@@ -66,17 +74,37 @@ public class BeanDetalle_Producto implements Serializable{
 			{
 				JSFUtil.crearMensajeError("Ingrese una cantidad");
 			}else{
+				
+				
+	            cantidad=detalle.getCantidadDetalle();
+	            
+	           
             	Iva=manager_iva.findIvaById(1);
-    			detalle.setSubtotal(new BigDecimal(this.subtotalDetalle(detalle.getCantidadDetalle().intValue(), catalogo.getPrecio().doubleValue())));
+    			detalle.setSubtotal(new BigDecimal(this.subtotalDetalle(cantidad.intValue(), catalogo.getPrecio().doubleValue())));
+    			subtotal=detalle.getSubtotal();
     			detalle.setPrecioProducto(catalogo.getPrecio());
     			detalle.setPrecioDescuento(catalogo.getDescuento());
     			detalle.setValorIva(new BigDecimal(detalle.getSubtotal().doubleValue()*Iva.getCantidad().doubleValue()));
     			detalle.setTotalDetalle(new BigDecimal(detalle.getSubtotal().doubleValue()-catalogo.getDescuento().doubleValue()+detalle.getValorIva().doubleValue()));
+    			total=detalle.getTotalDetalle();
     			manager_detalle.insertarDetalle(detalle,Iva, catalogo);
     			detalle=manager_detalle.findDetaleByUltimoDetalle();
+    			detalle.setCantidadDetalle(cantidad);
+    			listacantidad.add(cantidad.doubleValue());
+    			listasubtotal.add(subtotal.doubleValue());
+    			listatotal.add(total.doubleValue());
+    			System.out.println("la cantidad es la siguiente"+ detalle.getCantidadDetalle());
     			listadetalle.add(detalle);
+    		
+    			for(int i=0; i<listadetalle.size(); i++) 
+    			{
+    				listadetalle.get(i).setCantidadDetalle(new BigDecimal(listacantidad.get(i)));
+    				listadetalle.get(i).setSubtotal(new BigDecimal(listasubtotal.get(i)));
+    				listadetalle.get(i).setTotalDetalle(new BigDecimal(listatotal.get(i)));
+    			}
     			this.valorcompra();
     			cantidad_carrito=listadetalle.size();
+    			listadetalle_completa=manager_detalle.findAllDetallePedido();
     			
             }
 			
@@ -109,6 +137,8 @@ public class BeanDetalle_Producto implements Serializable{
 	
 	public double subtotalDetalle(int cantidad, double precio) 
 	{
+		System.out.println("el precio"+ precio);
+		System.out.println("La cantidad" +cantidad);
 		return cantidad*precio;
 	}
 	

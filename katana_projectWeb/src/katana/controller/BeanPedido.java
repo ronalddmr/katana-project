@@ -56,6 +56,7 @@ public class BeanPedido implements Serializable{
 	private String idCanton;
 	
 	
+	
 
 
 	@PostConstruct
@@ -72,6 +73,7 @@ public class BeanPedido implements Serializable{
 		listaCantones = managerDPA.findAllCantones();
 		listaPedido = managerPedido.findAllPedido();
 		listaestado=managerestado.findAllEstado();
+	
 			
 
 	}
@@ -79,6 +81,8 @@ public class BeanPedido implements Serializable{
 	
 	
 /*Bean para Pedidos*/
+	
+	
 	
 	public void actionListenerCantones()
 	{
@@ -139,6 +143,17 @@ public class BeanPedido implements Serializable{
 					(managerusuario.findUsuarioByMail(beanlogin.getCorreoUsuario()).getIdUsuario());
 			JSFUtil.crearMensajeInfo("El pedido se ha realizado con éxito");
 		} catch (Exception e) {
+			JSFUtil.crearMensajeError(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	public void actionListenerActualizarPedido() {
+		try {
+			managerPedido.actualizarPedido(pedidoSeleccionado,estado);
+			listaPedido = managerPedido.findAllPedido();
+			JSFUtil.crearMensajeInfo("Datos actualizados");
+		} catch (Exception e) {
+			listaPedido = managerPedido.findAllPedido();
 			JSFUtil.crearMensajeError(e.getMessage());
 			e.printStackTrace();
 		}

@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no"></meta>
+		<title>Detalle de Pedidos</title>
+	</f:facet>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form>
+		<p:menubar>
+			<p:menuitem>ADMINISTRADOR DE DETALLES DE PEDIDOS</p:menuitem>
+			<p:submenu style="margin-left:75%;" label="#{beanLogin.nombre}" icon="fa fa-user">
+            	<p:menuitem value="Salir" action="#{beanLogin.salirSistema()}"/>
+        	</p:submenu>
+		</p:menubar>
+	</h:form>
+	
+	<br />
+	<h:form id="form2">
+		<p:panel header="Datos del detalle de pedidos">
+			<p:dataTable value="#{beanDetalle_Producto.listadetalle_completa}" reflow="true"
+				var="color" paginator="true" rows="5">
+				<p:column headerText="ID" filterBy="#{color.idDetalle}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{color.idDetalle}" />
+				</p:column>
+				<p:column headerText="Producto" filterBy="#{color.proCatalogo.proProducto.nombre}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{color.proCatalogo.proProducto.nombre}" />
+				</p:column>
+				<p:column headerText="Cantidad" filterBy="#{color.cantidadDetalle}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{color.cantidadDetalle}" />
+				</p:column>
+				<p:column headerText="Pedido" filterBy="#{color.pedPedido.idPedido}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{color.pedPedido.idPedido}" />
+				</p:column>
+				<p:column headerText="Iva" filterBy="#{color.pedIva.cantidad}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{color.pedIva.cantidad}" />
+				</p:column>
+				<p:column headerText="Subtotal" filterBy="#{color.subtotal}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{color.subtotal}" />
+				</p:column>
+				<p:column headerText="Total" filterBy="#{color.totalDetalle}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{color.totalDetalle}" />
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+	<h:form>
+	<p:commandButton value="Inicio" action="/Usuario_administrador/index_admin"
+					icon="fa fa-home">
+				</p:commandButton >
+	</h:form>
+</body>
+</html>
+	

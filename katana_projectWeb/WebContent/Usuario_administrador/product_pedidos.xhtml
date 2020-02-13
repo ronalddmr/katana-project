@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no"></meta>
+		<title>Pedidos de Productos</title>
+	</f:facet>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form>
+		<p:menubar>
+			<p:menuitem>ADMINISTRADOR DE PEDIDOS</p:menuitem>
+			<p:submenu style="margin-left:75%;" label="#{beanLogin.nombre}" icon="fa fa-user">
+            	<p:menuitem value="Salir" action="#{beanLogin.salirSistema()}"/>
+        	</p:submenu>
+		</p:menubar>
+	</h:form>
+
+	
+	<h:form id="form2">
+		<p:panel header="Datos de los Pedidos">
+			<p:dataTable value="#{beanPedido.listaPedido}" reflow="true"
+				var="color" paginator="true" rows="5">
+				<p:column headerText="ID" filterBy="#{color.idPedido}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{color.idPedido}" />
+				</p:column>
+				<p:column headerText="Fecha de Pedido" filterBy="#{color.fechaPedido}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{color.fechaPedido}" />
+				</p:column>
+				<p:column headerText="Estado del Pedido" filterBy="#{color.pedEstado.nombre}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{color.pedEstado.nombre}" />
+				</p:column>
+				<p:column headerText="Costo de Envío" filterBy="#{color.costoEnvio}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{color.costoEnvio}" />
+				</p:column>
+				<p:column headerText="IVA" filterBy="#{color.ivaTotal}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{color.ivaTotal}" />
+				</p:column>
+				<p:column headerText="SUBTOTAL" filterBy="#{color.subtotal}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{color.subtotal}" />
+				</p:column>
+				<p:column headerText="TOTAL" filterBy="#{color.total}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{color.total}" />
+				</p:column>
+
+				<p:column headerText="Usuario" filterBy="#{color.usuUsuario.correo}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{color.usuUsuario.correo}" />
+				</p:column>
+				<p:column headerText="OPCIONES" priority="1">
+					
+					<p:commandButton icon="fa fa-edit" title="Editar"
+						actionListener="#{beanPedido.actionListenerSeleccionarEmpresa(color)}"
+						update=":formEdicion" oncomplete="PF('dlgEdicion').show();"></p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+	<br />
+	<h:form>
+	<p:commandButton value="Inicio" action="/Usuario_administrador/index_admin"
+					icon="fa fa-home">
+				</p:commandButton >
+	</h:form>
+	<p:dialog header="Editar información" widgetVar="dlgEdicion"
+		modal="true">
+		<h:form id="formEdicion">
+			<p:growl>
+				<p:autoUpdate></p:autoUpdate>
+			</p:growl>
+			<h:outputText value="ID: " />
+			<h:outputText value="#{beanPedido.pedidoSeleccionado.idPedido}" />
+			<p:panelGrid columns="2">
+				<h:outputText value="Estado" />
+				<p:selectOneMenu value="#{beanPedido.estado.idEstado}">
+					<f:selectItems value="#{beanPedido.listaestado}" var="p"
+						itemLabel="#{p.nombre}" itemValue="#{p.idEstado}" />
+				</p:selectOneMenu>
+			</p:panelGrid>
+			<p:commandButton value="Actualizar" icon="fa fa-save"
+				update="@form, :form2"
+				actionListener="#{beanPedido.actionListenerActualizarPedido()}"></p:commandButton>
+				
+				
+				
+			
+		</h:form>
+	</p:dialog>
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="Sí" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check"></p:commandButton>
+		<p:commandButton value="No" type="button"
+			styleClass="ui-confirmdialog-no" icon="fa fa-times"></p:commandButton>
+	</p:confirmDialog>
+</body>
+</html>
+	

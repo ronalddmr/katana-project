@@ -23,14 +23,27 @@ public class BeanCatalogo implements Serializable{
 	private ProCatalogo catalogo;
 	private ProCatalogo catalogoSeleccionado;
 	private List<ProCatalogo> listaMostrar;
+	private List<ProCatalogo> listaProductosVendidos;
 
 	@PostConstruct
 	public void inicializar() 
 	{
-		
+		listaProductosVendidos=new ArrayList<>();
 	    listaCatalogo=managerCatalogo.findAllCatalogo();
 	    listaMostrar=this.actionListenerListaProductosMostrar();
 	    catalogo=new ProCatalogo();
+	    if(listaCatalogo.size()<4) 
+	    {
+	    	for(int i=0; i<listaCatalogo.size();i++) 
+	    	{
+	    		listaProductosVendidos.add(listaCatalogo.get(i));
+	    	}
+	    }else 
+	    {
+	    	listaProductosVendidos.add(listaCatalogo.get(0));
+	    	listaProductosVendidos.add(listaCatalogo.get(1));
+	    	listaProductosVendidos.add(listaCatalogo.get(2));
+	    }
 	}
 	
 	
@@ -119,6 +132,18 @@ public class BeanCatalogo implements Serializable{
 
 	public void setListaMostrar(List<ProCatalogo> listaMostrar) {
 		this.listaMostrar = listaMostrar;
+	}
+
+
+
+	public List<ProCatalogo> getListaProductosVendidos() {
+		return listaProductosVendidos;
+	}
+
+
+
+	public void setListaProductosVendidos(List<ProCatalogo> listaProductosVendidos) {
+		this.listaProductosVendidos = listaProductosVendidos;
 	}
 
 	

@@ -105,8 +105,7 @@ public class ManagerPedido_Producto {
     	PedPedido e=findPedidoById(pedido.getIdPedido());
     	if(e==null)
     		throw new Exception("No existe ese Pedido");
-    	PedPedido ped=new PedPedido();
-        ped.setPedEstado(estado);
+        e.setPedEstado(estado);
     	em.merge(e);
     	
     }
